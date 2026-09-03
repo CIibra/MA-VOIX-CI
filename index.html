@@ -1,353 +1,1404 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Institut Supérieur Privé de Formation en Santé Raoul Follereau</title>
-<style>
-  :root{
-    --rouge:#C23B33;
-    --rouge-dark:#8C2A24;
-    --vert:#3E7A32;
-    --vert-dark:#2B5622;
-    --or:#D99B2B;
-    --or-dark:#9C6E1C;
-    --creme:#FAF7F0;
-    --encre:#1F2620;
-    --encre-douce:#4B564C;
-    --ligne:#E1DCCB;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    font-family:"Georgia","Iowan Old Style",serif;
-    background:var(--creme);
-    color:var(--encre);
-    line-height:1.6;
-  }
-  .sans{font-family:"Helvetica Neue",Arial,sans-serif;}
-  a{color:inherit;}
-  img{max-width:100%;display:block;}
-
-  .flagbar{height:4px;display:flex;}
-  .flagbar span{flex:1;}
-  .flagbar .r{background:var(--rouge);}
-  .flagbar .v{background:var(--vert);}
-
-  header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:20px 6vw;
-    background:var(--creme);
-    border-bottom:1px solid var(--ligne);
-    position:sticky;
-    top:0;
-    z-index:10;
-  }
-  .brand{display:flex;align-items:center;gap:12px;}
-  .mark{
-    width:38px;height:38px;border-radius:50%;
-    background:var(--vert);
-    display:flex;align-items:center;justify-content:center;
-    position:relative;
-  }
-  .mark::after{
-    content:"";
-    width:10px;height:10px;
-    background:var(--or);
-    clip-path:polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  }
-  .brand-name{font-family:"Georgia",serif;font-size:17px;letter-spacing:0.2px;}
-  .brand-name b{display:block;font-size:11px;font-weight:400;color:var(--encre-douce);font-family:"Helvetica Neue",Arial,sans-serif;}
-
-  nav{display:flex;gap:28px;font-size:14px;font-family:"Helvetica Neue",Arial,sans-serif;}
-  nav a{text-decoration:none;color:var(--encre-douce);border-bottom:1px solid transparent;padding-bottom:2px;}
-  nav a:hover{color:var(--encre);border-color:var(--rouge);}
-
-  .btn{
-    display:inline-block;
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:14px;
-    padding:11px 22px;
-    border-radius:2px;
-    text-decoration:none;
-    border:1px solid var(--encre);
-    cursor:pointer;
-  }
-  .btn-primary{background:var(--rouge);border-color:var(--rouge);color:#fff;}
-  .btn-primary:hover{background:var(--rouge-dark);border-color:var(--rouge-dark);}
-  .btn-ghost{background:transparent;color:var(--encre);}
-  .btn-ghost:hover{background:var(--encre);color:var(--creme);}
-
-  .hero{
-    padding:90px 6vw 70px;
-    max-width:820px;
-    margin:0 auto;
-    text-align:center;
-  }
-  .eyebrow{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:13px;
-    color:var(--vert-dark);
-    letter-spacing:0.4px;
-    margin-bottom:18px;
-  }
-  .hero h1{
-    font-size:44px;
-    font-weight:400;
-    line-height:1.2;
-    margin:0 0 22px;
-  }
-  .hero h1 em{font-style:italic;color:var(--rouge);}
-  .hero p{
-    font-size:17px;
-    color:var(--encre-douce);
-    max-width:560px;
-    margin:0 auto 34px;
-  }
-  .hero .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-
-  .stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    border-top:1px solid var(--ligne);
-    border-bottom:1px solid var(--ligne);
-    max-width:1000px;
-    margin:0 auto;
-  }
-  .stats div{
-    padding:26px 12px;
-    text-align:center;
-    border-left:1px solid var(--ligne);
-  }
-  .stats div:first-child{border-left:none;}
-  .stats .num{font-size:28px;font-family:"Georgia",serif;color:var(--vert-dark);}
-  .stats .label{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--encre-douce);margin-top:4px;}
-
-  section{padding:80px 6vw;max-width:1080px;margin:0 auto;}
-  .section-head{max-width:560px;margin-bottom:44px;}
-  .section-head .eyebrow{margin-bottom:12px;}
-  .section-head h2{font-size:30px;font-weight:400;margin:0 0 14px;}
-  .section-head p{color:var(--encre-douce);font-size:15.5px;margin:0;}
-
-  .filieres{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ligne);border:1px solid var(--ligne);}
-  .filiere{background:var(--creme);padding:32px;}
-  .filiere .num{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--or-dark);margin-bottom:14px;}
-  .filiere h3{font-size:20px;font-weight:400;margin:0 0 10px;}
-  .filiere p{font-size:14.5px;color:var(--encre-douce);margin:0 0 14px;}
-  .filiere .meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--vert-dark);border-top:1px solid var(--ligne);padding-top:12px;}
-
-  .bloc-mission{
-    background:var(--vert);
-    color:#fff;
-    border-radius:2px;
-    padding:56px 6vw;
-    display:grid;
-    grid-template-columns:1.2fr 1fr;
-    gap:40px;
-    align-items:center;
-  }
-  .bloc-mission h2{font-size:26px;font-weight:400;margin:0 0 16px;}
-  .bloc-mission p{opacity:0.92;font-size:15px;margin:0;}
-  .bloc-mission .chiffre{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    border-left:2px solid var(--or);
-    padding-left:20px;
-  }
-  .bloc-mission .chiffre .n{font-size:40px;font-family:"Georgia",serif;}
-  .bloc-mission .chiffre .l{font-size:13px;opacity:0.85;margin-top:4px;}
-
-  .etapes{counter-reset:step;}
-  .etape{
-    display:flex;gap:24px;
-    padding:26px 0;
-    border-top:1px solid var(--ligne);
-  }
-  .etape:last-child{border-bottom:1px solid var(--ligne);}
-  .etape .idx{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:13px;color:var(--rouge);
-    min-width:90px;
-    padding-top:2px;
-  }
-  .etape h3{font-size:17px;font-weight:400;margin:0 0 6px;}
-  .etape p{font-size:14.5px;color:var(--encre-douce);margin:0;max-width:520px;}
-
-  footer{
-    background:var(--encre);
-    color:#EDE9DD;
-    padding:56px 6vw 30px;
-    font-family:"Helvetica Neue",Arial,sans-serif;
-  }
-  .footer-grid{
-    display:grid;
-    grid-template-columns:1.4fr 1fr 1fr;
-    gap:40px;
-    max-width:1080px;
-    margin:0 auto 40px;
-  }
-  .footer-grid h4{font-size:12px;letter-spacing:0.4px;color:#B9B29A;margin:0 0 14px;font-weight:400;}
-  .footer-grid p, .footer-grid a{font-size:14px;color:#EDE9DD;text-decoration:none;display:block;margin-bottom:8px;}
-  .footer-grid p{color:#C9C4B3;}
-  .footer-bottom{
-    max-width:1080px;margin:0 auto;
-    border-top:1px solid #3A4038;
-    padding-top:20px;
-    font-size:12px;color:#93907F;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-  }
-
-  @media (max-width:820px){
-    nav{display:none;}
-    .hero h1{font-size:32px;}
-    .stats{grid-template-columns:repeat(2,1fr);}
-    .stats div:nth-child(3){border-left:none;}
-    .filieres{grid-template-columns:1fr;}
-    .bloc-mission{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr;}
-  }
-</style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ma Voie CI — Orientation scolaire et professionnelle</title>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+<div id="root"></div>
+<script type="text/plain" id="app-source">
 
-<div class="flagbar"><span class="r"></span><span class="v"></span></div>
+const { useState, useMemo, useEffect } = React;
 
-<header>
-  <div class="brand">
-    <div class="mark"></div>
-    <div class="brand-name">IPS Raoul Follereau<b>Fada N'Gourma — Burkina Faso</b></div>
-  </div>
-  <nav>
-    <a href="#filieres">Filières</a>
-    <a href="#mission">L'institut</a>
-    <a href="#admissions">Admissions</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <a class="btn btn-primary sans" href="#admissions">S'inscrire</a>
-</header>
+/* ---- Stockage local (remplace window.storage de l'environnement Claude) ---- */
+window.storage = {
+  get: async (key, shared) => {
+    const raw = localStorage.getItem("ocistore:" + key);
+    if (raw === null) throw new Error("not found");
+    return { key, value: raw, shared: !!shared };
+  },
+  set: async (key, value, shared) => {
+    localStorage.setItem("ocistore:" + key, value);
+    return { key, value, shared: !!shared };
+  },
+  delete: async (key, shared) => {
+    localStorage.removeItem("ocistore:" + key);
+    return { key, deleted: true, shared: !!shared };
+  },
+  list: async (prefix) => {
+    const keys = Object.keys(localStorage)
+      .filter((k) => k.startsWith("ocistore:" + (prefix || "")))
+      .map((k) => k.replace("ocistore:", ""));
+    return { keys };
+  },
+};
 
-<main>
+/* ---- Icônes (remplacent lucide-react, non disponible hors bundler) ---- */
+function IconBase({ size = 18, color = "currentColor", fill = "none", children, ...rest }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...rest}>
+      {children}
+    </svg>
+  );
+}
+const Compass = (p) => <IconBase {...p}><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88" /></IconBase>;
+const Target = (p) => <IconBase {...p}><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.5" /></IconBase>;
+const GraduationCap = (p) => <IconBase {...p}><path d="M22 10 12 5 2 10l10 5 10-5Z" /><path d="M6 12v5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5" /></IconBase>;
+const RefreshCw = (p) => <IconBase {...p}><path d="M3 12a9 9 0 0 1 15-6.7L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-15 6.7L3 16" /><path d="M3 21v-5h5" /></IconBase>;
+const SearchIcon = (p) => <IconBase {...p}><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></IconBase>;
+const ChevronRight = (p) => <IconBase {...p}><polyline points="9 18 15 12 9 6" /></IconBase>;
+const ChevronLeft = (p) => <IconBase {...p}><polyline points="15 18 9 12 15 6" /></IconBase>;
+const X = (p) => <IconBase {...p}><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></IconBase>;
+const MapPin = (p) => <IconBase {...p}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></IconBase>;
+const Scale = (p) => <IconBase {...p}><path d="M12 3v18" /><path d="M8 21h8" /><path d="M3 7l4-2 4 2-4 10Z" /><path d="M13 7l4-2 4 2-4 10Z" /></IconBase>;
+const ArrowRight = (p) => <IconBase {...p}><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></IconBase>;
+const Building2 = (p) => <IconBase {...p}><rect x="4" y="2" width="16" height="20" rx="1" /><rect x="8" y="6" width="2.5" height="2.5" /><rect x="13.5" y="6" width="2.5" height="2.5" /><rect x="8" y="11" width="2.5" height="2.5" /><rect x="13.5" y="11" width="2.5" height="2.5" /><rect x="9" y="16" width="6" height="6" /></IconBase>;
+const Heart = (p) => <IconBase {...p}><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8Z" /></IconBase>;
 
-  <section class="hero" style="padding-top:70px;">
-    <div class="eyebrow sans">Établissement privé de formation en sciences de la santé</div>
-    <h1>Former des agents de santé <em>compétents</em>, au service de la nation.</h1>
-    <p>L'institut prépare aux métiers du soin — sciences infirmières, obstétrique et paramédical — dans un cadre exigeant, tourné vers la pratique et la responsabilité professionnelle.</p>
-    <div class="actions">
-      <a class="btn btn-primary sans" href="#filieres">Voir les filières</a>
-      <a class="btn btn-ghost sans" href="#contact">Prendre contact</a>
+
+/* =========================================================================
+   DONNÉES — Domaines, Métiers, Formations, Établissements, Questionnaire
+   ========================================================================= */
+
+const DOMAINES = [
+  { id: "num", nom: "Numérique & Informatique" },
+  { id: "ing", nom: "Ingénierie & Industrie" },
+  { id: "btp", nom: "BTP & Architecture" },
+  { id: "agri", nom: "Agriculture & Agro-industrie" },
+  { id: "sante", nom: "Santé" },
+  { id: "com", nom: "Commerce, Vente & Entrepreneuriat" },
+  { id: "fin", nom: "Finance, Comptabilité & Gestion" },
+  { id: "droit", nom: "Droit & Administration" },
+  { id: "edu", nom: "Éducation & Sciences humaines" },
+  { id: "art_tech", nom: "Artisanat & Métiers techniques" },
+  { id: "tour", nom: "Tourisme, Hôtellerie & Transport" },
+  { id: "creation", nom: "Arts, Création & Communication" },
+];
+const domNom = (id) => DOMAINES.find((d) => d.id === id)?.nom || id;
+
+const ETABLISSEMENTS = [
+  { id: "ufhb", nom: "Université Félix Houphouët-Boigny (UFHB)", ville: "Abidjan (Cocody)", type: "Public", domaines: ["num", "ing", "sante", "droit", "edu", "fin"] },
+  { id: "una", nom: "Université Nangui Abrogoua", ville: "Abidjan (Abobo-Adjamé)", type: "Public", domaines: ["agri", "num", "ing", "sante"] },
+  { id: "inphb", nom: "Institut National Polytechnique Félix Houphouët-Boigny (INP-HB)", ville: "Yamoussoukro", type: "Public", domaines: ["ing", "btp", "agri", "fin"] },
+  { id: "uao", nom: "Université Alassane Ouattara", ville: "Bouaké", type: "Public", domaines: ["droit", "edu", "com", "agri"] },
+  { id: "upgc", nom: "Université Peleforo Gon Coulibaly", ville: "Korhogo", type: "Public", domaines: ["agri", "edu", "droit"] },
+  { id: "ujlg", nom: "Université Jean Lorougnon Guédé", ville: "Daloa", type: "Public", domaines: ["agri", "sante", "edu"] },
+  { id: "esatic", nom: "École Supérieure Africaine des TIC (ESATIC)", ville: "Abidjan", type: "Public", domaines: ["num"] },
+  { id: "ensea", nom: "École Nationale Supérieure de Statistique et d'Économie Appliquée (ENSEA)", ville: "Abidjan", type: "Public", domaines: ["fin", "num"] },
+  { id: "infas", nom: "Institut National de Formation des Agents de Santé (INFAS)", ville: "Abidjan + antennes régionales", type: "Public", domaines: ["sante"] },
+  { id: "insaac", nom: "Institut National Supérieur des Arts et de l'Action Culturelle (INSAAC)", ville: "Abidjan", type: "Public", domaines: ["creation"] },
+  { id: "ena", nom: "École Nationale d'Administration (ENA)", ville: "Abidjan", type: "Public", domaines: ["droit", "fin"] },
+  { id: "cifap", nom: "Groupe CIFAP", ville: "Abidjan", type: "Privé", domaines: ["com", "fin", "num", "tour"] },
+  { id: "esca", nom: "ESCA École de Commerce", ville: "Abidjan", type: "Privé", domaines: ["com", "fin"] },
+  { id: "iua", nom: "Institut Universitaire d'Abidjan (IUA)", ville: "Abidjan", type: "Privé", domaines: ["droit", "fin", "com", "num"] },
+  { id: "bingerville", nom: "Lycée Agricole de Bingerville", ville: "Bingerville", type: "Public", domaines: ["agri"] },
+  { id: "cfpp", nom: "Centres de Formation Professionnelle par Apprentissage (CFPP / AGEFOP)", ville: "Plusieurs villes", type: "Public/Privé", domaines: ["art_tech", "btp", "agri"] },
+  { id: "sanpedro", nom: "Université de San-Pédro", ville: "San-Pédro", type: "Public", domaines: ["agri", "tour", "ing"] },
+  { id: "man", nom: "Université de Man", ville: "Man", type: "Public", domaines: ["agri", "edu"] },
+];
+const etabById = (id) => ETABLISSEMENTS.find((e) => e.id === id);
+
+const METIERS = [
+  { id: "dev", nom: "Développeur logiciel", domaine: "num", niveau: "Bac+2 à Bac+5", description: "Conçoit, code et fait évoluer des applications, sites web ou logiciels.", missions: ["Écrire et tester du code", "Corriger des bugs", "Collaborer avec une équipe produit"], ou: ["Entreprises tech", "Banques", "Startups", "Freelance"], competences: ["Programmation", "Logique", "Résolution de problèmes", "Anglais technique"], qualites: ["Rigueur", "Curiosité", "Patience"], formations: ["licinfo", "btsri", "lpdata"], proches: ["data", "reseau", "digital"] },
+  { id: "data", nom: "Data Analyst", domaine: "num", niveau: "Bac+3 à Bac+5", description: "Exploite des données pour aider une entreprise à prendre de meilleures décisions.", missions: ["Collecter et nettoyer des données", "Construire des tableaux de bord", "Présenter des résultats"], ou: ["Banques", "Télécoms", "Agro-industrie", "ONG"], competences: ["Statistiques", "Tableurs/SQL", "Esprit d'analyse"], qualites: ["Rigueur", "Curiosité"], formations: ["lpdata", "licinfo", "ensea_stat"], proches: ["dev", "fin_analyste"] },
+  { id: "reseau", nom: "Technicien réseaux & cybersécurité", domaine: "num", niveau: "Bac+2 à Bac+3", description: "Installe, sécurise et dépanne les réseaux informatiques d'une structure.", missions: ["Installer du matériel réseau", "Sécuriser les systèmes", "Assister les utilisateurs"], ou: ["Entreprises", "Administrations", "Opérateurs télécoms"], competences: ["Réseaux", "Sécurité informatique", "Dépannage"], qualites: ["Méthode", "Sang-froid"], formations: ["btsri"], proches: ["dev", "digital"] },
+  { id: "digital", nom: "Chargé(e) de communication digitale", domaine: "num", domaineSecondaire: "creation", niveau: "Bac+2 à Bac+3", description: "Gère la présence en ligne et les réseaux sociaux d'une marque ou structure.", missions: ["Créer du contenu", "Animer des communautés", "Suivre des statistiques"], ou: ["Agences", "Entreprises", "Indépendant"], competences: ["Réseaux sociaux", "Rédaction", "Créativité"], qualites: ["Créativité", "Réactivité"], formations: ["btscom_audio"], proches: ["graphiste", "journaliste"] },
+
+  { id: "ingmeca", nom: "Ingénieur mécanique / électromécanique", domaine: "ing", niveau: "Bac+5", description: "Conçoit et supervise des systèmes mécaniques ou électriques industriels.", missions: ["Concevoir des équipements", "Superviser la maintenance", "Optimiser la production"], ou: ["Industries", "Usines agro-alimentaires", "Mines", "Énergie"], competences: ["Mécanique", "Calcul", "Gestion de projet"], qualites: ["Rigueur", "Sens pratique"], formations: ["inginphb", "btselec"], proches: ["techindus", "archi"] },
+  { id: "techindus", nom: "Technicien de maintenance industrielle", domaine: "ing", niveau: "Bac+2", description: "Entretient et répare les machines et équipements d'une usine.", missions: ["Diagnostiquer les pannes", "Réparer les machines", "Assurer l'entretien préventif"], ou: ["Usines", "Agro-industrie", "Mines"], competences: ["Mécanique", "Électricité", "Lecture de plans"], qualites: ["Sens pratique", "Réactivité"], formations: ["btsmaint", "btselec"], proches: ["ingmeca", "electricien"] },
+  { id: "ingagro", nom: "Ingénieur agroalimentaire", domaine: "ing", domaineSecondaire: "agri", niveau: "Bac+5", description: "Supervise la transformation des produits agricoles en produits alimentaires.", missions: ["Superviser une chaîne de production", "Contrôler la qualité", "Améliorer les process"], ou: ["Usines de transformation cacao/café", "Agro-industries", "Contrôle qualité"], competences: ["Chimie", "Process industriel", "Normes qualité"], qualites: ["Rigueur", "Organisation"], formations: ["inginphb", "btsagroalim"], proches: ["agronome", "ingmeca"] },
+  { id: "ingmines", nom: "Ingénieur des mines et géologie", domaine: "ing", niveau: "Bac+5", description: "Étudie et supervise l'exploitation des ressources minières (or, manganèse, nickel...).", missions: ["Étudier les gisements", "Superviser l'extraction", "Veiller à la sécurité et à l'impact environnemental"], ou: ["Sociétés minières", "Bureaux d'études géologiques", "Administration des mines"], competences: ["Géologie", "Génie minier", "Gestion de projet"], qualites: ["Rigueur scientifique", "Résistance au terrain"], formations: ["inginphb"], proches: ["ingmeca", "technicien_env"] },
+  { id: "energie_tech", nom: "Technicien en énergies renouvelables", domaine: "art_tech", domaineSecondaire: "ing", niveau: "Bac+2", description: "Installe et entretient des équipements solaires et autres systèmes d'énergie renouvelable.", missions: ["Installer des panneaux solaires", "Entretenir des installations", "Diagnostiquer des pannes électriques"], ou: ["Entreprises d'installation solaire", "Zones rurales et périurbaines", "Auto-entreprise"], competences: ["Électricité", "Énergies renouvelables", "Sens pratique"], qualites: ["Rigueur", "Autonomie"], formations: ["btsenr"], proches: ["electricien", "techindus"] },
+  { id: "chauffeur_pl", nom: "Conducteur routier professionnel / logisticien", domaine: "tour", niveau: "CQP / Bac+2", description: "Transporte des marchandises ou des personnes et organise les tournées logistiques.", missions: ["Conduire des poids lourds ou véhicules de transport", "Organiser des tournées", "Assurer la sécurité du chargement"], ou: ["Sociétés de transport", "Port d'Abidjan / San-Pédro", "Entreprises de logistique"], competences: ["Conduite professionnelle", "Sens de l'organisation", "Connaissance du réseau routier"], qualites: ["Ponctualité", "Autonomie", "Résistance"], formations: ["cqptransport"], proches: ["importexport", "agentvoyage"] },
+  { id: "technicien_env", nom: "Technicien en environnement et développement durable", domaine: "agri", domaineSecondaire: "droit", niveau: "Bac+2 à Bac+3", description: "Surveille l'impact environnemental des activités agricoles, industrielles ou minières.", missions: ["Réaliser des relevés environnementaux", "Contrôler le respect des normes", "Proposer des mesures correctives"], ou: ["Entreprises minières et industrielles", "ONG environnementales", "Administrations"], competences: ["Sciences de l'environnement", "Réglementation", "Terrain"], qualites: ["Rigueur", "Sens de l'observation"], formations: ["btsenv"], proches: ["agronome", "ingmines"] },
+
+  { id: "archi", nom: "Architecte", domaine: "btp", niveau: "Bac+5", description: "Conçoit des bâtiments et supervise leur construction.", missions: ["Dessiner des plans", "Conseiller les clients", "Suivre les chantiers"], ou: ["Cabinets d'architecture", "Bureaux d'études", "Indépendant"], competences: ["Dessin technique", "Logiciels de CAO", "Réglementation"], qualites: ["Créativité", "Rigueur", "Sens du relationnel"], formations: ["archinphb", "liccivil"], proches: ["condtrav", "geometre"] },
+  { id: "condtrav", nom: "Conducteur de travaux", domaine: "btp", niveau: "Bac+2 à Bac+3", description: "Coordonne les équipes et le déroulement d'un chantier de construction.", missions: ["Planifier les travaux", "Coordonner les équipes", "Contrôler l'avancement"], ou: ["Entreprises BTP", "Chantiers publics et privés"], competences: ["Gestion de chantier", "Lecture de plans", "Management"], qualites: ["Organisation", "Autorité naturelle"], formations: ["btsbat"], proches: ["archi", "geometre"] },
+  { id: "geometre", nom: "Technicien géomètre-topographe", domaine: "btp", niveau: "Bac+2", description: "Mesure et délimite les terrains pour la construction ou le cadastre.", missions: ["Réaliser des relevés de terrain", "Établir des plans", "Borner des parcelles"], ou: ["Cabinets de géomètres", "Administrations", "BTP"], competences: ["Mesure de terrain", "Cartographie", "Logiciels SIG"], qualites: ["Précision", "Travail extérieur"], formations: ["btsgeo"], proches: ["archi", "condtrav"] },
+  { id: "electricien", nom: "Électricien du bâtiment", domaine: "art_tech", domaineSecondaire: "btp", niveau: "CQP / BT", description: "Installe et répare les systèmes électriques des bâtiments.", missions: ["Installer des câblages", "Dépanner des installations", "Respecter les normes de sécurité"], ou: ["Chantiers", "Entreprises", "Auto-entreprise"], competences: ["Électricité", "Lecture de schémas", "Sécurité"], qualites: ["Précision", "Sens pratique"], formations: ["cqpelec"], proches: ["techindus", "mecanicien"] },
+
+  { id: "agronome", nom: "Ingénieur agronome", domaine: "agri", niveau: "Bac+5", description: "Conseille et optimise les productions agricoles à grande échelle.", missions: ["Étudier les sols et cultures", "Conseiller les producteurs", "Piloter des projets agricoles"], ou: ["Coopératives", "Ministère de l'Agriculture", "ONG", "Entreprises agro"], competences: ["Agronomie", "Gestion de projet", "Analyse de sol"], qualites: ["Sens du terrain", "Rigueur scientifique"], formations: ["inginphb", "btsagri"], proches: ["technicagri", "ingagro"] },
+  { id: "technicagri", nom: "Technicien agricole", domaine: "agri", niveau: "Bac+2", description: "Accompagne les producteurs dans les techniques de culture et d'élevage.", missions: ["Suivre des parcelles", "Conseiller sur les intrants", "Appuyer les coopératives"], ou: ["Coopératives agricoles", "Structures d'encadrement rural", "Exploitations"], competences: ["Techniques culturales", "Élevage", "Terrain"], qualites: ["Endurance", "Sens pratique"], formations: ["btsagri"], proches: ["agronome", "techagroalim"] },
+  { id: "techagroalim", nom: "Technicien agroalimentaire", domaine: "agri", niveau: "Bac+2", description: "Contrôle la qualité et la transformation des produits agricoles (cacao, café, anacarde...).", missions: ["Contrôler la qualité des produits", "Suivre la transformation", "Appliquer les normes d'hygiène"], ou: ["Usines de transformation", "Coopératives", "Laboratoires"], competences: ["Contrôle qualité", "Chimie appliquée", "Normes HACCP"], qualites: ["Rigueur", "Sens de l'observation"], formations: ["btsagroalim"], proches: ["ingagro", "technicagri"] },
+
+  { id: "medecin", nom: "Médecin généraliste", domaine: "sante", niveau: "Bac+7", description: "Diagnostique et soigne les patients en cabinet, clinique ou hôpital.", missions: ["Ausculter les patients", "Poser un diagnostic", "Prescrire un traitement"], ou: ["Hôpitaux", "Cliniques", "Cabinets", "Zones rurales"], competences: ["Sciences médicales", "Diagnostic", "Écoute"], qualites: ["Empathie", "Résistance au stress", "Rigueur"], formations: ["medufhb"], proches: ["infirmier", "pharmacien"] },
+  { id: "infirmier", nom: "Infirmier(ère) diplômé(e) d'État", domaine: "sante", niveau: "Bac+3", description: "Assure les soins quotidiens aux patients et assiste les médecins.", missions: ["Administrer des soins", "Surveiller l'état des patients", "Assister lors d'actes médicaux"], ou: ["Hôpitaux", "Centres de santé", "Cliniques"], competences: ["Soins infirmiers", "Sang-froid", "Rigueur"], qualites: ["Empathie", "Résistance physique et morale"], formations: ["infasinf"], proches: ["medecin", "sagefemme"] },
+  { id: "sagefemme", nom: "Sage-femme", domaine: "sante", niveau: "Bac+3", description: "Suit les grossesses et accompagne les accouchements.", missions: ["Suivre la grossesse", "Accompagner l'accouchement", "Conseiller les mères"], ou: ["Maternités", "Centres de santé", "Hôpitaux"], competences: ["Obstétrique", "Soins", "Écoute"], qualites: ["Calme", "Empathie"], formations: ["infassf"], proches: ["infirmier", "medecin"] },
+  { id: "pharmacien", nom: "Pharmacien", domaine: "sante", niveau: "Bac+6", description: "Délivre les médicaments et conseille les patients sur leur usage.", missions: ["Délivrer des médicaments", "Conseiller les patients", "Contrôler la qualité des produits"], ou: ["Pharmacies", "Industrie pharmaceutique", "Hôpitaux"], competences: ["Pharmacologie", "Chimie", "Conseil"], qualites: ["Rigueur", "Sens du service"], formations: ["pharmufhb"], proches: ["medecin", "labo"] },
+  { id: "labo", nom: "Technicien de laboratoire médical", domaine: "sante", niveau: "Bac+2", description: "Réalise des analyses médicales (sang, urine...) pour aider au diagnostic.", missions: ["Réaliser des prélèvements et analyses", "Utiliser des appareils de laboratoire", "Transmettre les résultats"], ou: ["Hôpitaux", "Laboratoires d'analyses", "Cliniques"], competences: ["Biologie", "Précision", "Appareils de labo"], qualites: ["Rigueur", "Concentration"], formations: ["btsbiomed"], proches: ["medecin", "pharmacien"] },
+
+  { id: "entrepreneur", nom: "Commerçant(e) / Entrepreneur(e)", domaine: "com", niveau: "Variable", description: "Crée et gère sa propre activité de vente de biens ou de services.", missions: ["Identifier des opportunités", "Gérer les stocks et la trésorerie", "Fidéliser la clientèle"], ou: ["Marché", "Boutique", "En ligne"], competences: ["Sens du commerce", "Gestion", "Négociation"], qualites: ["Audace", "Persévérance"], formations: ["btscomint", "licecogest"], proches: ["commercial", "importexport"] },
+  { id: "commercial", nom: "Responsable / chargé(e) commercial(e)", domaine: "com", niveau: "Bac+2 à Bac+5", description: "Développe les ventes d'une entreprise auprès de clients professionnels ou particuliers.", missions: ["Prospecter des clients", "Négocier des contrats", "Suivre les objectifs de vente"], ou: ["Entreprises", "Banques", "Distribution"], competences: ["Négociation", "Relationnel", "Reporting"], qualites: ["Aisance relationnelle", "Ténacité"], formations: ["btscomint", "esca_com"], proches: ["entrepreneur", "importexport"] },
+  { id: "importexport", nom: "Agent import-export / logistique commerciale", domaine: "com", domaineSecondaire: "tour", niveau: "Bac+2 à Bac+3", description: "Organise les opérations d'achat et de vente entre la Côte d'Ivoire et l'étranger.", missions: ["Suivre les formalités douanières", "Coordonner le transport", "Gérer la documentation commerciale"], ou: ["Sociétés de négoce", "Port d'Abidjan", "Transitaires"], competences: ["Commerce international", "Douane", "Langues"], qualites: ["Organisation", "Rigueur"], formations: ["btscomint", "lictranslog"], proches: ["commercial", "entrepreneur"] },
+
+  { id: "comptable", nom: "Comptable", domaine: "fin", niveau: "Bac+2 à Bac+3", description: "Tient les comptes d'une entreprise et prépare les documents financiers.", missions: ["Enregistrer les opérations comptables", "Préparer les bilans", "Suivre la trésorerie"], ou: ["Entreprises", "Cabinets comptables", "Administrations"], competences: ["Comptabilité", "Rigueur", "Logiciels de gestion"], qualites: ["Précision", "Discrétion"], formations: ["btscompta", "licecogest"], proches: ["fin_analyste", "banquier"] },
+  { id: "fin_analyste", nom: "Analyste financier", domaine: "fin", niveau: "Bac+4 à Bac+5", description: "Étudie la santé financière d'une entreprise pour orienter les décisions d'investissement.", missions: ["Analyser des états financiers", "Évaluer des risques", "Rédiger des rapports"], ou: ["Banques", "Sociétés d'investissement", "Grandes entreprises"], competences: ["Finance", "Statistiques", "Modélisation"], qualites: ["Rigueur analytique", "Esprit de synthèse"], formations: ["ensea_stat", "licecogest"], proches: ["comptable", "banquier"] },
+  { id: "banquier", nom: "Chargé(e) de clientèle bancaire", domaine: "fin", niveau: "Bac+3 à Bac+5", description: "Conseille les clients d'une banque sur leurs comptes, crédits et placements.", missions: ["Conseiller les clients", "Étudier des dossiers de crédit", "Développer le portefeuille clients"], ou: ["Banques", "Établissements de microfinance"], competences: ["Finance", "Relation client", "Analyse de risque"], qualites: ["Sens du contact", "Rigueur"], formations: ["licecogest", "esca_com"], proches: ["comptable", "fin_analyste"] },
+
+  { id: "juriste", nom: "Juriste / Avocat", domaine: "droit", niveau: "Bac+5", description: "Conseille et défend des personnes ou entreprises sur des questions de droit.", missions: ["Analyser des dossiers juridiques", "Rédiger des actes", "Plaider ou conseiller"], ou: ["Cabinets d'avocats", "Entreprises", "Administrations"], competences: ["Droit", "Argumentation", "Rédaction"], qualites: ["Rigueur", "Sens de la justice"], formations: ["licdroit"], proches: ["adminciv", "notaire"] },
+  { id: "adminciv", nom: "Administrateur civil", domaine: "droit", niveau: "Bac+5", description: "Occupe des fonctions de direction dans l'administration publique ivoirienne.", missions: ["Piloter des services publics", "Appliquer les politiques publiques", "Gérer des équipes"], ou: ["Ministères", "Préfectures", "Collectivités"], competences: ["Droit public", "Management", "Gestion publique"], qualites: ["Sens de l'intérêt général", "Leadership"], formations: ["ena_admin"], proches: ["juriste", "enseignant"] },
+
+  { id: "enseignant", nom: "Enseignant(e)", domaine: "edu", niveau: "Bac+2 à Bac+5", description: "Transmet des savoirs aux élèves du primaire, secondaire ou supérieur.", missions: ["Préparer des cours", "Enseigner et évaluer", "Suivre la progression des élèves"], ou: ["Écoles", "Collèges", "Lycées", "Universités"], competences: ["Pédagogie", "Maîtrise d'une matière", "Communication"], qualites: ["Patience", "Sens de la transmission"], formations: ["cafop", "licedu"], proches: ["conseiller_orientation", "adminciv"] },
+  { id: "conseiller_orientation", nom: "Conseiller(ère) d'orientation", domaine: "edu", niveau: "Bac+3 à Bac+5", description: "Aide les élèves et étudiants à choisir leurs études et leur futur métier.", missions: ["Recevoir les élèves en entretien", "Faire connaître les filières", "Accompagner les choix"], ou: ["Établissements scolaires", "Centres d'information", "Universités"], competences: ["Écoute", "Connaissance des filières", "Psychologie"], qualites: ["Empathie", "Pédagogie"], formations: ["licedu"], proches: ["enseignant"] },
+
+  { id: "mecanicien", nom: "Mécanicien auto", domaine: "art_tech", niveau: "CQP / BT", description: "Répare et entretient les véhicules automobiles.", missions: ["Diagnostiquer les pannes", "Réparer les moteurs", "Entretenir les véhicules"], ou: ["Garages", "Concessions", "Auto-entreprise"], competences: ["Mécanique auto", "Diagnostic", "Outillage"], qualites: ["Sens pratique", "Patience"], formations: ["cqpmeca"], proches: ["electricien", "techindus"] },
+  { id: "menuisier", nom: "Menuisier / Ébéniste", domaine: "art_tech", niveau: "CQP / BT", description: "Fabrique et répare des meubles et structures en bois.", missions: ["Concevoir des meubles", "Travailler le bois", "Assembler et finir les pièces"], ou: ["Ateliers", "Chantiers", "Auto-entreprise"], competences: ["Travail du bois", "Précision", "Créativité manuelle"], qualites: ["Minutie", "Patience"], formations: ["cqpbois"], proches: ["soudeur", "couturier"] },
+  { id: "soudeur", nom: "Soudeur / Métallier", domaine: "art_tech", niveau: "CQP / BT", description: "Assemble et façonne des structures métalliques.", missions: ["Souder des pièces métalliques", "Lire des plans techniques", "Fabriquer des structures"], ou: ["Ateliers de métallerie", "Chantiers BTP", "Industrie"], competences: ["Soudure", "Lecture de plans", "Sécurité"], qualites: ["Précision", "Résistance physique"], formations: ["cqpsoud"], proches: ["menuisier", "techindus"] },
+  { id: "couturier", nom: "Couturier(ère) / Styliste", domaine: "art_tech", domaineSecondaire: "creation", niveau: "CQP / BT", description: "Conçoit et confectionne des vêtements, du sur-mesure à la petite série.", missions: ["Prendre des mesures", "Confectionner des vêtements", "Créer des modèles"], ou: ["Ateliers de couture", "Maisons de mode", "Auto-entreprise"], competences: ["Couture", "Créativité", "Sens de la mode"], qualites: ["Précision", "Créativité"], formations: ["cqpcouture"], proches: ["menuisier", "graphiste"] },
+
+  { id: "guide", nom: "Guide touristique", domaine: "tour", niveau: "Bac+2", description: "Fait découvrir les sites touristiques et culturels aux visiteurs.", missions: ["Concevoir des circuits", "Accompagner des groupes", "Partager l'histoire et la culture locales"], ou: ["Agences de voyage", "Sites touristiques", "Indépendant"], competences: ["Culture générale", "Langues", "Sens de l'accueil"], qualites: ["Aisance à l'oral", "Curiosité"], formations: ["btstour"], proches: ["hotelier", "agentvoyage"] },
+  { id: "hotelier", nom: "Hôtelier / Restaurateur", domaine: "tour", niveau: "Bac+2 à Bac+3", description: "Gère l'accueil, l'hébergement ou la restauration des clients.", missions: ["Accueillir la clientèle", "Gérer les réservations", "Superviser le service"], ou: ["Hôtels", "Restaurants", "Résidences"], competences: ["Gestion hôtelière", "Sens du service", "Management"], qualites: ["Sens de l'accueil", "Organisation"], formations: ["btstour"], proches: ["guide", "agentvoyage"] },
+  { id: "agentvoyage", nom: "Agent de voyages / transport", domaine: "tour", niveau: "Bac+2", description: "Organise des voyages et gère la billetterie pour les clients.", missions: ["Conseiller les voyageurs", "Réserver des billets et séjours", "Gérer la logistique de voyage"], ou: ["Agences de voyage", "Compagnies aériennes", "Sociétés de transport"], competences: ["Sens du service", "Organisation", "Outils de réservation"], qualites: ["Rigueur", "Amabilité"], formations: ["btstour", "lictranslog"], proches: ["guide", "hotelier"] },
+
+  { id: "graphiste", nom: "Graphiste / Designer visuel", domaine: "creation", niveau: "Bac+2 à Bac+3", description: "Crée des visuels pour des marques, sites web ou supports imprimés.", missions: ["Créer des identités visuelles", "Réaliser des maquettes", "Utiliser des logiciels graphiques"], ou: ["Agences", "Entreprises", "Indépendant"], competences: ["Logiciels graphiques", "Créativité", "Sens esthétique"], qualites: ["Créativité", "Sens du détail"], formations: ["insaac_art", "btscom_audio"], proches: ["digital", "couturier"] },
+  { id: "journaliste", nom: "Journaliste / Réalisateur audiovisuel", domaine: "creation", niveau: "Bac+3 à Bac+5", description: "Enquête, rédige ou réalise des contenus d'information ou audiovisuels.", missions: ["Enquêter et vérifier l'information", "Rédiger ou tourner des reportages", "Présenter du contenu"], ou: ["Médias", "Chaînes de télévision", "Production audiovisuelle"], competences: ["Rédaction", "Prise de parole", "Outils audiovisuels"], qualites: ["Curiosité", "Esprit critique"], formations: ["btscom_audio", "insaac_art"], proches: ["digital", "graphiste"] },
+];
+const metierById = (id) => METIERS.find((m) => m.id === id);
+
+const FORMATIONS = [
+  { id: "licinfo", nom: "Licence Informatique", niveau: "Bac+3", diplome: "Licence", domaine: "num", duree: "3 ans", acces: "Bac série C, D, ou équivalent scientifique", etabs: ["ufhb", "una", "esatic"], debouches: ["dev", "data", "reseau"], poursuites: "Master Informatique, Data, Cybersécurité" },
+  { id: "btsri", nom: "BTS Réseaux Informatiques & Télécoms", niveau: "Bac+2", diplome: "BTS", domaine: "num", duree: "2 ans", acces: "Bac toutes séries + tests", etabs: ["esatic", "cifap"], debouches: ["reseau", "dev"], poursuites: "Licence professionnelle, Licence Informatique" },
+  { id: "lpdata", nom: "Licence Professionnelle Data & Intelligence Artificielle", niveau: "Bac+3", diplome: "Licence Pro", domaine: "num", duree: "1 à 3 ans", acces: "Bac+2 scientifique ou informatique", etabs: ["esatic"], debouches: ["data", "dev"], poursuites: "Master Data/IA" },
+  { id: "ensea_stat", nom: "Cycle Ingénieur Statisticien", niveau: "Bac+5", diplome: "Diplôme d'ingénieur", domaine: "fin", duree: "5 ans (dont classe préparatoire)", acces: "Concours après Bac scientifique / Bac+2", etabs: ["ensea"], debouches: ["data", "fin_analyste"], poursuites: "Spécialisation statistique, data science" },
+
+  { id: "inginphb", nom: "Diplôme d'Ingénieur (génie mécanique, électromécanique, agro-industrie)", niveau: "Bac+5", diplome: "Diplôme d'ingénieur", domaine: "ing", duree: "5 ans (dont cycle préparatoire)", acces: "Concours après Bac C/D ou classe préparatoire", etabs: ["inphb"], debouches: ["ingmeca", "ingagro", "ingmines"], poursuites: "Master spécialisé, doctorat" },
+  { id: "btselec", nom: "BTS Électrotechnique", niveau: "Bac+2", diplome: "BTS", domaine: "ing", duree: "2 ans", acces: "Bac série C, D, F ou équivalent technique", etabs: ["cfpp", "inphb"], debouches: ["ingmeca", "techindus", "electricien"], poursuites: "Licence professionnelle, école d'ingénieur" },
+  { id: "btsmaint", nom: "BTS Maintenance Industrielle", niveau: "Bac+2", diplome: "BTS", domaine: "ing", duree: "2 ans", acces: "Bac série technique ou scientifique", etabs: ["cfpp"], debouches: ["techindus"], poursuites: "Licence professionnelle industrielle" },
+  { id: "btsenr", nom: "BTS Énergies Renouvelables", niveau: "Bac+2", diplome: "BTS", domaine: "art_tech", duree: "2 ans", acces: "Bac série C, D, F ou technique", etabs: ["cfpp", "inphb"], debouches: ["energie_tech"], poursuites: "Licence professionnelle énergie, école d'ingénieur" },
+  { id: "cqptransport", nom: "CQP Conduite Routière & Transport", niveau: "CQP", diplome: "Certificat de Qualification Professionnelle", domaine: "tour", duree: "6 mois à 1 an", acces: "Permis de conduire + niveau 3e", etabs: ["cfpp"], debouches: ["chauffeur_pl"], poursuites: "Brevet transport, logistique" },
+  { id: "btsenv", nom: "BTS Gestion de l'Environnement", niveau: "Bac+2", diplome: "BTS", domaine: "agri", duree: "2 ans", acces: "Bac série D ou scientifique", etabs: ["una", "sanpedro"], debouches: ["technicien_env"], poursuites: "Licence professionnelle environnement" },
+
+  { id: "archinphb", nom: "Diplôme d'Architecte", niveau: "Bac+5", diplome: "Diplôme d'architecte", domaine: "btp", duree: "5 ans", acces: "Bac scientifique + concours/dossier", etabs: ["inphb"], debouches: ["archi"], poursuites: "Spécialisation urbanisme, HMONP" },
+  { id: "liccivil", nom: "Licence Génie Civil", niveau: "Bac+3", diplome: "Licence", domaine: "btp", duree: "3 ans", acces: "Bac série C, D, ou technique", etabs: ["ufhb", "inphb"], debouches: ["archi", "condtrav"], poursuites: "Master Génie Civil, école d'ingénieur" },
+  { id: "btsbat", nom: "BTS Bâtiment / Génie Civil", niveau: "Bac+2", diplome: "BTS", domaine: "btp", duree: "2 ans", acces: "Bac série C, D, F ou technique", etabs: ["cfpp"], debouches: ["condtrav", "geometre"], poursuites: "Licence professionnelle BTP" },
+  { id: "btsgeo", nom: "BTS Géomètre-Topographe", niveau: "Bac+2", diplome: "BTS", domaine: "btp", duree: "2 ans", acces: "Bac série C, D ou technique", etabs: ["inphb"], debouches: ["geometre"], poursuites: "Licence professionnelle Topographie" },
+
+  { id: "btsagri", nom: "BTS Production Agricole", niveau: "Bac+2", diplome: "BTS", domaine: "agri", duree: "2 ans", acces: "Bac série D ou agricole", etabs: ["bingerville", "inphb"], debouches: ["technicagri", "agronome"], poursuites: "Licence professionnelle agriculture" },
+  { id: "btsagroalim", nom: "BTS Agroalimentaire", niveau: "Bac+2", diplome: "BTS", domaine: "agri", duree: "2 ans", acces: "Bac série D ou technique", etabs: ["bingerville", "cfpp"], debouches: ["techagroalim", "ingagro"], poursuites: "Licence professionnelle agro-industrie" },
+
+  { id: "medufhb", nom: "Doctorat en Médecine", niveau: "Bac+7", diplome: "Doctorat", domaine: "sante", duree: "7 ans minimum", acces: "Bac série C, D + concours d'entrée", etabs: ["ufhb"], debouches: ["medecin"], poursuites: "Spécialisation médicale (internat)" },
+  { id: "pharmufhb", nom: "Diplôme d'État de Pharmacien", niveau: "Bac+6", diplome: "Diplôme d'État", domaine: "sante", duree: "6 ans", acces: "Bac série C, D + concours", etabs: ["ufhb"], debouches: ["pharmacien"], poursuites: "Spécialisation en pharmacie hospitalière/industrielle" },
+  { id: "infasinf", nom: "Diplôme d'État d'Infirmier", niveau: "Bac+3", diplome: "Diplôme d'État", domaine: "sante", duree: "3 ans", acces: "Bac série D ou équivalent + concours", etabs: ["infas"], debouches: ["infirmier"], poursuites: "Spécialisations en soins (bloc, anesthésie...)" },
+  { id: "infassf", nom: "Diplôme d'État de Sage-femme", niveau: "Bac+3", diplome: "Diplôme d'État", domaine: "sante", duree: "3 ans", acces: "Bac série D + concours", etabs: ["infas"], debouches: ["sagefemme"], poursuites: "Spécialisation en santé maternelle" },
+  { id: "btsbiomed", nom: "BTS Analyses Biomédicales", niveau: "Bac+2", diplome: "BTS", domaine: "sante", duree: "2 ans", acces: "Bac série D", etabs: ["infas", "cfpp"], debouches: ["labo"], poursuites: "Licence professionnelle biologie médicale" },
+
+  { id: "btscomint", nom: "BTS Commerce International", niveau: "Bac+2", diplome: "BTS", domaine: "com", duree: "2 ans", acces: "Bac toutes séries", etabs: ["cifap", "esca", "iua"], debouches: ["entrepreneur", "commercial", "importexport"], poursuites: "Licence professionnelle commerce" },
+  { id: "licecogest", nom: "Licence Économie-Gestion", niveau: "Bac+3", diplome: "Licence", domaine: "fin", duree: "3 ans", acces: "Bac toutes séries, économique de préférence", etabs: ["ufhb", "uao", "iua"], debouches: ["comptable", "fin_analyste", "banquier"], poursuites: "Master Finance, Gestion, Comptabilité" },
+  { id: "esca_com", nom: "Cycle École de Commerce", niveau: "Bac+3 à Bac+5", diplome: "Diplôme d'école de commerce", domaine: "com", duree: "3 à 5 ans", acces: "Bac + dossier/concours", etabs: ["esca", "cifap"], debouches: ["commercial", "banquier"], poursuites: "Master spécialisé (marketing, finance)" },
+  { id: "btscompta", nom: "BTS Comptabilité et Gestion", niveau: "Bac+2", diplome: "BTS", domaine: "fin", duree: "2 ans", acces: "Bac toutes séries", etabs: ["cifap", "iua"], debouches: ["comptable"], poursuites: "Licence professionnelle comptabilité, DECOFI" },
+  { id: "lictranslog", nom: "Licence Transport & Logistique", niveau: "Bac+3", diplome: "Licence", domaine: "tour", duree: "3 ans", acces: "Bac toutes séries", etabs: ["cifap"], debouches: ["importexport", "agentvoyage"], poursuites: "Master Logistique et Supply Chain" },
+
+  { id: "licdroit", nom: "Licence en Droit", niveau: "Bac+3", diplome: "Licence", domaine: "droit", duree: "3 ans", acces: "Bac toutes séries", etabs: ["ufhb", "uao", "upgc"], debouches: ["juriste"], poursuites: "Master Droit, CAPA (avocat), Magistrature" },
+  { id: "ena_admin", nom: "Cycle Administration Générale", niveau: "Bac+4 à Bac+5", diplome: "Diplôme ENA", domaine: "droit", duree: "2 à 3 ans après Licence", acces: "Concours après Licence", etabs: ["ena"], debouches: ["adminciv"], poursuites: "Carrière dans la haute administration" },
+
+  { id: "cafop", nom: "Formation CAFOP (Instituteur)", niveau: "Bac", diplome: "CEAP", domaine: "edu", duree: "2 ans", acces: "Bac + concours d'entrée au CAFOP", etabs: ["cfpp"], debouches: ["enseignant"], poursuites: "Licence Sciences de l'Éducation" },
+  { id: "licedu", nom: "Licence Sciences de l'Éducation", niveau: "Bac+3", diplome: "Licence", domaine: "edu", duree: "3 ans", acces: "Bac toutes séries", etabs: ["ufhb", "uao", "ujlg"], debouches: ["enseignant", "conseiller_orientation"], poursuites: "Master Éducation, CAPES" },
+
+  { id: "cqpelec", nom: "CQP Électricien du bâtiment", niveau: "CQP", diplome: "Certificat de Qualification Professionnelle", domaine: "art_tech", duree: "6 mois à 2 ans (souvent en alternance)", acces: "Niveau 3e ou expérience pratique", etabs: ["cfpp"], debouches: ["electricien"], poursuites: "Brevet de Technicien, auto-entreprise" },
+  { id: "cqpmeca", nom: "CQP Mécanique automobile", niveau: "CQP", diplome: "Certificat de Qualification Professionnelle", domaine: "art_tech", duree: "6 mois à 2 ans (souvent en alternance)", acces: "Niveau 3e ou expérience pratique", etabs: ["cfpp"], debouches: ["mecanicien"], poursuites: "Brevet de Technicien, auto-entreprise" },
+  { id: "cqpbois", nom: "CQP Menuiserie-Ébénisterie", niveau: "CQP", diplome: "Certificat de Qualification Professionnelle", domaine: "art_tech", duree: "6 mois à 2 ans (souvent en alternance)", acces: "Niveau 3e ou expérience pratique", etabs: ["cfpp"], debouches: ["menuisier"], poursuites: "Brevet de Technicien, atelier propre" },
+  { id: "cqpsoud", nom: "CQP Soudure-Métallerie", niveau: "CQP", diplome: "Certificat de Qualification Professionnelle", domaine: "art_tech", duree: "6 mois à 2 ans (souvent en alternance)", acces: "Niveau 3e ou expérience pratique", etabs: ["cfpp"], debouches: ["soudeur"], poursuites: "Brevet de Technicien, atelier propre" },
+  { id: "cqpcouture", nom: "CQP Couture-Stylisme", niveau: "CQP", diplome: "Certificat de Qualification Professionnelle", domaine: "art_tech", duree: "6 mois à 2 ans", acces: "Niveau 3e ou expérience pratique", etabs: ["cfpp"], debouches: ["couturier"], poursuites: "Brevet de Technicien, marque propre" },
+
+  { id: "btstour", nom: "BTS Tourisme-Hôtellerie", niveau: "Bac+2", diplome: "BTS", domaine: "tour", duree: "2 ans", acces: "Bac toutes séries", etabs: ["cifap"], debouches: ["guide", "hotelier", "agentvoyage"], poursuites: "Licence professionnelle tourisme" },
+
+  { id: "btscom_audio", nom: "BTS Communication & Audiovisuel", niveau: "Bac+2", diplome: "BTS", domaine: "creation", duree: "2 ans", acces: "Bac toutes séries", etabs: ["cifap", "iua"], debouches: ["digital", "graphiste", "journaliste"], poursuites: "Licence professionnelle communication" },
+  { id: "insaac_art", nom: "Formation Arts Visuels & Communication", niveau: "Bac+2 à Bac+3", diplome: "Diplôme INSAAC", domaine: "creation", duree: "2 à 3 ans", acces: "Bac + dossier/concours artistique", etabs: ["insaac"], debouches: ["graphiste", "journaliste"], poursuites: "Spécialisation design, cinéma, arts plastiques" },
+];
+const formationById = (id) => FORMATIONS.find((f) => f.id === id);
+
+const QUESTIONS = [
+  { id: "q1", texte: "Qu'est-ce que tu préfères faire ?", options: [
+    { texte: "Résoudre des problèmes techniques", poids: { ing: 3, num: 2, btp: 1 } },
+    { texte: "Construire, fabriquer, réparer", poids: { btp: 3, art_tech: 3, ing: 1 } },
+    { texte: "Aider et soigner les autres", poids: { sante: 4, edu: 1 } },
+    { texte: "Utiliser un ordinateur, coder", poids: { num: 4 } },
+    { texte: "Créer, dessiner, imaginer", poids: { creation: 4 } },
+    { texte: "Cultiver, élever, travailler la terre", poids: { agri: 4 } },
+    { texte: "Vendre, négocier, entreprendre", poids: { com: 4, fin: 1 } },
+    { texte: "Accueillir, voyager, faire découvrir", poids: { tour: 4 } },
+  ]},
+  { id: "q2", texte: "Quelles matières préfères-tu ?", options: [
+    { texte: "Mathématiques", poids: { num: 2, ing: 2, fin: 1 } },
+    { texte: "Physique-Chimie", poids: { ing: 2, btp: 1, sante: 1 } },
+    { texte: "SVT", poids: { agri: 2, sante: 2 } },
+    { texte: "Français / Langues", poids: { droit: 1, edu: 2, creation: 1, tour: 1 } },
+    { texte: "Histoire-Géographie", poids: { droit: 1, edu: 2, tour: 1 } },
+    { texte: "Économie", poids: { fin: 2, com: 2 } },
+    { texte: "Informatique", poids: { num: 3 } },
+    { texte: "Arts", poids: { creation: 3 } },
+    { texte: "Technologie / travaux pratiques", poids: { art_tech: 2, btp: 1 } },
+  ]},
+  { id: "q3", texte: "Quel environnement de travail t'attire le plus ?", options: [
+    { texte: "Un bureau", poids: { fin: 1, droit: 1, com: 1 } },
+    { texte: "Un chantier ou un atelier", poids: { btp: 2, art_tech: 2 } },
+    { texte: "Un champ ou l'extérieur", poids: { agri: 3, tour: 1 } },
+    { texte: "Un hôpital ou un centre de santé", poids: { sante: 3 } },
+    { texte: "Une entreprise ou un commerce", poids: { com: 2, fin: 1 } },
+    { texte: "Une école", poids: { edu: 3 } },
+    { texte: "Devant un ordinateur", poids: { num: 3 } },
+    { texte: "Toujours en mouvement", poids: { tour: 2, com: 1 } },
+  ]},
+  { id: "q4", texte: "Tu préfères travailler...", options: [
+    { texte: "Seul(e)", poids: { num: 1, creation: 1, art_tech: 1 } },
+    { texte: "En équipe sur un projet technique", poids: { btp: 1, ing: 1, sante: 1 } },
+    { texte: "Avec des clients", poids: { com: 2, tour: 2 } },
+    { texte: "Avec des enfants ou des élèves", poids: { edu: 3 } },
+    { texte: "Avec des patients", poids: { sante: 3 } },
+    { texte: "Avec des données et des chiffres", poids: { num: 1, fin: 2 } },
+    { texte: "Avec la terre ou les animaux", poids: { agri: 3 } },
+    { texte: "Avec ses mains, des objets", poids: { art_tech: 2, btp: 1 } },
+  ]},
+  { id: "q5", texte: "Quelle durée d'études t'intéresse le plus ?", options: [
+    { texte: "Courtes, pour travailler vite (CQP, BT)", poids: { art_tech: 2, com: 1, tour: 1 } },
+    { texte: "Moyennes (BTS, Licence, 2 à 3 ans)", poids: { num: 1, fin: 1, agri: 1, sante: 1 } },
+    { texte: "Longues (école d'ingénieur, médecine, Master)", poids: { ing: 1, sante: 1, droit: 1, num: 1 } },
+    { texte: "Peu importe, selon le métier visé", poids: {} },
+  ]},
+  { id: "q6", texte: "Quel type de travail t'intéresse le plus ?", options: [
+    { texte: "Technique", poids: { ing: 2, btp: 1, art_tech: 1 } },
+    { texte: "Scientifique", poids: { sante: 2, agri: 1, ing: 1 } },
+    { texte: "Créatif", poids: { creation: 3 } },
+    { texte: "Administratif", poids: { droit: 2, fin: 1 } },
+    { texte: "Commercial", poids: { com: 3 } },
+    { texte: "Social / humain", poids: { edu: 2, sante: 1 } },
+    { texte: "Numérique", poids: { num: 3 } },
+    { texte: "Agricole / environnemental", poids: { agri: 3 } },
+    { texte: "Juridique", poids: { droit: 3 } },
+    { texte: "Financier", poids: { fin: 3 } },
+  ]},
+];
+
+/* =========================================================================
+   MOTEUR DE RECOMMANDATION
+   ========================================================================= */
+
+function computeDomainScores(answers) {
+  const scores = {};
+  DOMAINES.forEach((d) => (scores[d.id] = 0));
+  answers.forEach((optIndex, qIndex) => {
+    if (optIndex === null || optIndex === undefined) return;
+    const opt = QUESTIONS[qIndex].options[optIndex];
+    Object.entries(opt.poids).forEach(([dom, val]) => {
+      scores[dom] = (scores[dom] || 0) + val;
+    });
+  });
+  const max = Math.max(1, ...Object.values(scores));
+  const pct = {};
+  Object.entries(scores).forEach(([k, v]) => (pct[k] = Math.round((v / max) * 100)));
+  return pct;
+}
+
+function computeMetierScores(domainPct) {
+  return METIERS.map((m) => {
+    const primary = domainPct[m.domaine] || 0;
+    const secondary = m.domaineSecondaire ? (domainPct[m.domaineSecondaire] || 0) : 0;
+    const score = Math.round(primary * 0.75 + secondary * 0.25);
+    return { metier: m, score };
+  }).sort((a, b) => b.score - a.score);
+}
+
+const NIVEAUX_ETUDIANT = [
+  { id: 1, label: "Bac / entrée post-bac" },
+  { id: 2, label: "Bac+2 (BTS, DUT...)" },
+  { id: 3, label: "Bac+3 (Licence)" },
+  { id: 4, label: "Bac+4 / Bac+5 (Master, école d'ingénieur...)" },
+];
+
+function niveauRange(str) {
+  if (!str) return { min: 1, max: 1 };
+  if (/CQP/i.test(str)) return { min: 0, max: 1 };
+  const nums = [...str.matchAll(/Bac\+(\d)/g)].map((m) => parseInt(m[1], 10));
+  if (nums.length === 0) {
+    if (/Bac/i.test(str)) return { min: 1, max: 1 };
+    return { min: 1, max: 3 };
+  }
+  return { min: Math.min(...nums), max: Math.max(...nums) };
+}
+
+const ADJACENT_DOMAINS = {
+  num: ["fin", "creation", "ing"],
+  ing: ["btp", "num", "agri", "art_tech"],
+  btp: ["ing", "art_tech"],
+  agri: ["ing", "sante", "art_tech"],
+  sante: ["agri", "edu"],
+  com: ["fin", "tour", "droit"],
+  fin: ["com", "droit", "num"],
+  droit: ["fin", "edu", "com"],
+  edu: ["droit", "sante", "creation"],
+  art_tech: ["btp", "ing", "agri"],
+  tour: ["com", "creation"],
+  creation: ["num", "tour", "edu"],
+};
+
+/* =========================================================================
+   COMPOSANTS UI DE BASE
+   ========================================================================= */
+
+const COLORS = {
+  bg: "#FAF9F5",
+  card: "#FFFFFF",
+  ink: "#20241F",
+  inkSoft: "#5A5F55",
+  line: "#E4E1D7",
+  green: "#0B6B3A",
+  greenSoft: "#E7F0E9",
+  orange: "#D9720B",
+  orangeSoft: "#FBEBD9",
+};
+
+function GlobalStyle() {
+  return (
+    <style>{`
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
+      * { box-sizing: border-box; }
+      .oci-root { font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif; color: ${COLORS.ink}; background: ${COLORS.bg}; }
+      .oci-display { font-family: 'Fraunces', Georgia, serif; }
+      .oci-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+      .oci-scroll::-webkit-scrollbar-thumb { background: ${COLORS.line}; border-radius: 4px; }
+      .oci-focus:focus-visible { outline: 2px solid ${COLORS.green}; outline-offset: 2px; }
+      .oci-tag { transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+      .oci-fade { animation: ociFade .35s ease both; }
+      @keyframes ociFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+      @media (prefers-reduced-motion: reduce) { .oci-fade { animation: none; } }
+    `}</style>
+  );
+}
+
+function Pill({ children, tone = "green", active = false, onClick, small }) {
+  const toneColor = tone === "green" ? COLORS.green : COLORS.orange;
+  const toneSoft = tone === "green" ? COLORS.greenSoft : COLORS.orangeSoft;
+  return (
+    <button
+      onClick={onClick}
+      className={`oci-tag oci-focus ${small ? "text-xs px-2.5 py-1" : "text-sm px-3 py-1.5"} rounded-full border`}
+      style={{
+        borderColor: active ? toneColor : COLORS.line,
+        background: active ? toneSoft : "transparent",
+        color: active ? toneColor : COLORS.inkSoft,
+        cursor: onClick ? "pointer" : "default",
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function Card({ children, className = "", style = {}, onClick }) {
+  return (
+    <div
+      onClick={onClick}
+      className={`rounded-2xl border ${className}`}
+      style={{ background: COLORS.card, borderColor: COLORS.line, cursor: onClick ? "pointer" : "default", ...style }}
+    >
+      {children}
     </div>
-  </section>
+  );
+}
 
-  <div class="stats sans">
-    <div><div class="num">4</div><div class="label">Filières de formation</div></div>
-    <div><div class="num">3 ans</div><div class="label">Durée moyenne du cycle</div></div>
-    <div><div class="num">300+</div><div class="label">Étudiants formés</div></div>
-    <div><div class="num">État</div><div class="label">Diplômes reconnus</div></div>
-  </div>
+function FavoriButton({ item, favoris, toggleFavori }) {
+  const active = favoris.some((f) => f.type === item.type && f.id === item.id);
+  return (
+    <button
+      onClick={() => toggleFavori(item)}
+      className="oci-focus text-sm px-4 py-2 rounded-full border flex items-center gap-1.5"
+      style={{ borderColor: active ? COLORS.orange : COLORS.line, color: active ? COLORS.orange : COLORS.ink, background: active ? COLORS.orangeSoft : "transparent" }}
+    >
+      <Heart size={14} fill={active ? COLORS.orange : "none"} /> {active ? "Dans tes favoris" : "Ajouter aux favoris"}
+    </button>
+  );
+}
 
-  <section id="filieres">
-    <div class="section-head">
-      <div class="eyebrow sans">Filières</div>
-      <h2>Quatre parcours vers les métiers du soin</h2>
-      <p>Chaque filière associe enseignement théorique et stages pratiques en structures de santé partenaires.</p>
+function SectionTitle({ eyebrow, title, sub }) {
+  return (
+    <div className="mb-6">
+      {eyebrow && <div className="text-sm mb-1" style={{ color: COLORS.orange }}>{eyebrow}</div>}
+      <h2 className="oci-display text-2xl md:text-3xl" style={{ color: COLORS.ink }}>{title}</h2>
+      {sub && <p className="mt-2 text-sm md:text-base max-w-2xl" style={{ color: COLORS.inkSoft }}>{sub}</p>}
     </div>
-    <div class="filieres">
-      <div class="filiere">
-        <div class="num sans">01</div>
-        <h3>Sciences infirmières</h3>
-        <p>Formation généraliste aux soins infirmiers, de la sémiologie à la prise en charge du patient.</p>
-        <div class="meta">Diplôme d'État · 3 ans</div>
+  );
+}
+
+function Header({ view, setView }) {
+  return (
+    <header className="sticky top-0 z-20 backdrop-blur border-b" style={{ background: "rgba(250,249,245,0.9)", borderColor: COLORS.line }}>
+      <div className="max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between gap-4">
+        <button className="flex items-center gap-2 oci-focus" onClick={() => setView({ name: "home" })}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: COLORS.green }}>
+            <Compass size={17} color="white" />
+          </div>
+          <span className="oci-display text-lg" style={{ color: COLORS.ink }}>Ma Voie CI</span>
+        </button>
+        <nav className="hidden md:flex items-center gap-1 text-sm">
+          {[
+            ["Questionnaire", "quiz"],
+            ["Métiers", "metiers"],
+            ["Formations", "formations"],
+            ["Explorer", "explorer"],
+            ["Favoris", "favoris"],
+            ["Comparer", "comparateur"],
+          ].map(([label, name]) => (
+            <button
+              key={name}
+              onClick={() => setView({ name })}
+              className="oci-focus px-3 py-1.5 rounded-full"
+              style={{
+                color: view.name === name ? COLORS.green : COLORS.inkSoft,
+                background: view.name === name ? COLORS.greenSoft : "transparent",
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </nav>
+        <button
+          onClick={() => setView({ name: "quiz" })}
+          className="oci-focus text-sm px-4 py-2 rounded-full text-white hidden sm:block"
+          style={{ background: COLORS.orange }}
+        >
+          Commencer
+        </button>
       </div>
-      <div class="filiere">
-        <div class="num sans">02</div>
-        <h3>Sage-femme / Maïeuticien d'État</h3>
-        <p>Suivi de grossesse, accouchement et soins postnatals, en salle et en communauté.</p>
-        <div class="meta">Diplôme d'État · 3 ans</div>
+    </header>
+  );
+}
+
+/* =========================================================================
+   PAGE : ACCUEIL
+   ========================================================================= */
+
+function Home({ setView }) {
+  const choices = [
+    { icon: Compass, tone: "green", titre: "Je ne sais pas quoi choisir", desc: "Réponds à quelques questions simples, on te propose des pistes.", action: () => setView({ name: "quiz" }) },
+    { icon: Target, tone: "orange", titre: "Je connais le métier que je veux", desc: "Cherche un métier et découvre comment y arriver en Côte d'Ivoire.", action: () => setView({ name: "metiers" }) },
+    { icon: GraduationCap, tone: "green", titre: "Je connais ma formation", desc: "Découvre les métiers et poursuites d'études liés à ta formation.", action: () => setView({ name: "formations" }) },
+    { icon: Building2, tone: "orange", titre: "Je suis déjà étudiant", desc: "Indique ton domaine et ton niveau pour voir tes possibilités.", action: () => setView({ name: "etudiant" }) },
+    { icon: RefreshCw, tone: "green", titre: "Je veux changer de voie", desc: "Explore les passerelles possibles vers un autre domaine.", action: () => setView({ name: "reorientation" }) },
+    { icon: SearchIcon, tone: "orange", titre: "Explorer librement", desc: "Parcours les domaines, métiers, formations et établissements.", action: () => setView({ name: "explorer" }) },
+  ];
+  return (
+    <div className="oci-fade">
+      <section className="max-w-6xl mx-auto px-5 pt-14 pb-10 md:pt-20 md:pb-14">
+        <div className="max-w-3xl">
+          <div className="flex items-center gap-2 mb-5">
+            <span className="w-6 h-1.5 rounded-full" style={{ background: COLORS.orange }} />
+            <span className="w-6 h-1.5 rounded-full" style={{ background: COLORS.green }} />
+            <span className="text-sm" style={{ color: COLORS.inkSoft }}>Le GPS de l'orientation en Côte d'Ivoire</span>
+          </div>
+          <h1 className="oci-display text-4xl md:text-6xl leading-tight" style={{ color: COLORS.ink }}>
+            Trouve ta voie. Comprends ton parcours. Construis ton avenir.
+          </h1>
+          <p className="mt-5 text-base md:text-lg max-w-xl" style={{ color: COLORS.inkSoft }}>
+            Gratuit, sans compte, sans connexion. Des métiers réels, des formations disponibles en Côte d'Ivoire, du numérique à l'agriculture en passant par la santé et l'artisanat.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <button onClick={() => setView({ name: "quiz" })} className="oci-focus px-6 py-3 rounded-full text-white text-sm md:text-base" style={{ background: COLORS.green }}>
+              Faire le questionnaire
+            </button>
+            <button onClick={() => setView({ name: "explorer" })} className="oci-focus px-6 py-3 rounded-full text-sm md:text-base border" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
+              Explorer sans questionnaire
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-5 pb-16">
+        <div className="grid md:grid-cols-2 gap-4">
+          {choices.map(({ icon: Icon, tone, titre, desc, action }) => (
+            <Card key={titre} onClick={action} className="p-5 md:p-6 hover:shadow-sm transition-shadow">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: tone === "green" ? COLORS.greenSoft : COLORS.orangeSoft }}>
+                  <Icon size={19} color={tone === "green" ? COLORS.green : COLORS.orange} />
+                </div>
+                <div>
+                  <div className="font-semibold" style={{ color: COLORS.ink }}>{titre}</div>
+                  <div className="text-sm mt-1" style={{ color: COLORS.inkSoft }}>{desc}</div>
+                </div>
+                <ChevronRight size={18} className="ml-auto shrink-0 mt-2" color={COLORS.inkSoft} />
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-t" style={{ borderColor: COLORS.line }}>
+        <div className="max-w-6xl mx-auto px-5 py-12">
+          <SectionTitle eyebrow="Ce que couvre l'appli" title="Pas seulement des métiers de bureau" sub="Numérique, ingénierie, BTP, santé, commerce — mais aussi agriculture, agro-industrie et artisanat, des secteurs à fort potentiel en Côte d'Ivoire." />
+          <div className="flex flex-wrap gap-2">
+            {DOMAINES.map((d) => (
+              <Pill key={d.id} tone={d.id === "agri" || d.id === "art_tech" ? "orange" : "green"} small>{d.nom}</Pill>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+/* =========================================================================
+   PAGE : QUESTIONNAIRE
+   ========================================================================= */
+
+function Quiz({ setView }) {
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState(Array(QUESTIONS.length).fill(null));
+
+  const q = QUESTIONS[step];
+  const progress = Math.round(((step) / QUESTIONS.length) * 100);
+
+  const choose = (idx) => {
+    const next = [...answers];
+    next[step] = idx;
+    setAnswers(next);
+    setTimeout(() => {
+      if (step < QUESTIONS.length - 1) setStep(step + 1);
+      else {
+        const pct = computeDomainScores(next);
+        setView({ name: "resultats", pct });
+      }
+    }, 180);
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto px-5 py-12 oci-fade">
+      <div className="flex items-center justify-between text-sm mb-2" style={{ color: COLORS.inkSoft }}>
+        <span>Question {step + 1} / {QUESTIONS.length}</span>
+        <button onClick={() => setView({ name: "home" })} className="oci-focus flex items-center gap-1"><X size={14} /> Quitter</button>
       </div>
-      <div class="filiere">
-        <div class="num sans">03</div>
-        <h3>Assistanat en pharmacie</h3>
-        <p>Gestion officinale, délivrance et accueil des patients aux côtés du pharmacien.</p>
-        <div class="meta">Certificat · 2 ans</div>
+      <div className="w-full h-1.5 rounded-full mb-8" style={{ background: COLORS.line }}>
+        <div className="h-1.5 rounded-full transition-all" style={{ width: `${progress}%`, background: COLORS.green }} />
       </div>
-      <div class="filiere">
-        <div class="num sans">04</div>
-        <h3>Garçons et filles de salle</h3>
-        <p>Hygiène hospitalière, logistique de soins et appui aux équipes soignantes.</p>
-        <div class="meta">Certificat · 1 an</div>
+
+      <h2 className="oci-display text-2xl md:text-3xl mb-6" style={{ color: COLORS.ink }}>{q.texte}</h2>
+
+      <div className="grid gap-2.5">
+        {q.options.map((opt, idx) => (
+          <button
+            key={opt.texte}
+            onClick={() => choose(idx)}
+            className="oci-focus text-left px-4 py-3.5 rounded-xl border transition-colors"
+            style={{
+              borderColor: answers[step] === idx ? COLORS.green : COLORS.line,
+              background: answers[step] === idx ? COLORS.greenSoft : COLORS.card,
+              color: COLORS.ink,
+            }}
+          >
+            {opt.texte}
+          </button>
+        ))}
+      </div>
+
+      {step > 0 && (
+        <button onClick={() => setStep(step - 1)} className="oci-focus mt-6 text-sm flex items-center gap-1" style={{ color: COLORS.inkSoft }}>
+          <ChevronLeft size={15} /> Question précédente
+        </button>
+      )}
+    </div>
+  );
+}
+
+/* =========================================================================
+   PAGE : RÉSULTATS DU QUESTIONNAIRE
+   ========================================================================= */
+
+function Resultats({ pct, setView }) {
+  const domainRanking = DOMAINES.map((d) => ({ ...d, score: pct[d.id] || 0 })).sort((a, b) => b.score - a.score);
+  const metierScores = computeMetierScores(pct).filter((m) => m.score > 0);
+  const tresCompatible = metierScores.filter((m) => m.score >= 80).slice(0, 6);
+  const compatible = metierScores.filter((m) => m.score >= 55 && m.score < 80).slice(0, 6);
+
+  return (
+    <div className="max-w-4xl mx-auto px-5 py-12 oci-fade">
+      <div className="text-sm mb-1" style={{ color: COLORS.orange }}>Ton profil</div>
+      <h1 className="oci-display text-3xl md:text-4xl mb-2" style={{ color: COLORS.ink }}>
+        Profil {domainRanking[0].nom.toLowerCase()}
+      </h1>
+      <p className="text-sm md:text-base mb-8 max-w-2xl" style={{ color: COLORS.inkSoft }}>
+        Selon tes réponses, voici les domaines et métiers qui semblent les plus compatibles avec toi. Ce sont des pistes, pas une décision — tu restes libre de ton choix.
+      </p>
+
+      <Card className="p-5 md:p-6 mb-8">
+        <div className="font-semibold mb-4" style={{ color: COLORS.ink }}>Tes domaines d'affinité</div>
+        <div className="space-y-3">
+          {domainRanking.slice(0, 6).map((d) => (
+            <div key={d.id}>
+              <div className="flex justify-between text-sm mb-1">
+                <span style={{ color: COLORS.ink }}>{d.nom}</span>
+                <span style={{ color: COLORS.inkSoft }}>{d.score}%</span>
+              </div>
+              <div className="w-full h-2 rounded-full" style={{ background: COLORS.line }}>
+                <div className="h-2 rounded-full" style={{ width: `${d.score}%`, background: COLORS.green }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      {tresCompatible.length > 0 && (
+        <div className="mb-8">
+          <div className="font-semibold mb-3" style={{ color: COLORS.ink }}>Très compatibles</div>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {tresCompatible.map(({ metier, score }) => (
+              <MetierMiniCard key={metier.id} metier={metier} score={score} setView={setView} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {compatible.length > 0 && (
+        <div className="mb-8">
+          <div className="font-semibold mb-3" style={{ color: COLORS.ink }}>Compatibles</div>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {compatible.map(({ metier, score }) => (
+              <MetierMiniCard key={metier.id} metier={metier} score={score} setView={setView} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-3 mt-4">
+        <button onClick={() => setView({ name: "quiz" })} className="oci-focus text-sm px-4 py-2.5 rounded-full border" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
+          Refaire le questionnaire
+        </button>
+        <button onClick={() => setView({ name: "metiers" })} className="oci-focus text-sm px-4 py-2.5 rounded-full text-white" style={{ background: COLORS.orange }}>
+          Explorer tous les métiers
+        </button>
       </div>
     </div>
-  </section>
+  );
+}
 
-  <section id="mission">
-    <div class="bloc-mission">
+function MetierMiniCard({ metier, score, setView }) {
+  return (
+    <Card onClick={() => setView({ name: "metier", id: metier.id })} className="p-4 hover:shadow-sm transition-shadow">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <div className="font-semibold text-sm" style={{ color: COLORS.ink }}>{metier.nom}</div>
+          <div className="text-xs mt-1" style={{ color: COLORS.inkSoft }}>{domNom(metier.domaine)}</div>
+        </div>
+        <div className="text-xs px-2 py-1 rounded-full shrink-0" style={{ background: COLORS.greenSoft, color: COLORS.green }}>{score}%</div>
+      </div>
+    </Card>
+  );
+}
+
+/* =========================================================================
+   PAGE : RECHERCHE MÉTIERS + FICHE MÉTIER
+   ========================================================================= */
+
+function MetiersSearch({ setView }) {
+  const [q, setQ] = useState("");
+  const [domFilter, setDomFilter] = useState(null);
+
+  const results = useMemo(() => {
+    return METIERS.filter((m) => {
+      const matchQ = q.trim() === "" || m.nom.toLowerCase().includes(q.toLowerCase()) || domNom(m.domaine).toLowerCase().includes(q.toLowerCase());
+      const matchDom = !domFilter || m.domaine === domFilter;
+      return matchQ && matchDom;
+    });
+  }, [q, domFilter]);
+
+  return (
+    <div className="max-w-5xl mx-auto px-5 py-12 oci-fade">
+      <SectionTitle eyebrow="Je connais le métier que je veux" title="Je veux devenir…" sub="Tape un métier — architecte, comptable, ingénieur agronome — et découvre le parcours complet pour y arriver." />
+
+      <div className="relative mb-5">
+        <SearchIcon size={17} className="absolute left-4 top-1/2 -translate-y-1/2" color={COLORS.inkSoft} />
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Ex : je veux devenir médecin, architecte, comptable..."
+          className="oci-focus w-full pl-11 pr-4 py-3.5 rounded-xl border text-sm"
+          style={{ borderColor: COLORS.line, background: COLORS.card }}
+        />
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-8 oci-scroll">
+        <Pill tone="green" active={!domFilter} onClick={() => setDomFilter(null)} small>Tous</Pill>
+        {DOMAINES.map((d) => (
+          <Pill key={d.id} tone="green" active={domFilter === d.id} onClick={() => setDomFilter(d.id === domFilter ? null : d.id)} small>{d.nom}</Pill>
+        ))}
+      </div>
+
+      <div className="text-sm mb-3" style={{ color: COLORS.inkSoft }}>{results.length} métier(s)</div>
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+        {results.map((m) => (
+          <Card key={m.id} onClick={() => setView({ name: "metier", id: m.id })} className="p-4 hover:shadow-sm transition-shadow">
+            <div className="font-semibold text-sm" style={{ color: COLORS.ink }}>{m.nom}</div>
+            <div className="text-xs mt-1" style={{ color: COLORS.orange }}>{domNom(m.domaine)}</div>
+            <div className="text-xs mt-2" style={{ color: COLORS.inkSoft }}>{m.niveau}</div>
+          </Card>
+        ))}
+        {results.length === 0 && <div className="text-sm col-span-full" style={{ color: COLORS.inkSoft }}>Aucun métier trouvé. Essaie un autre mot-clé.</div>}
+      </div>
+    </div>
+  );
+}
+
+function MetierFiche({ id, setView, compareList, toggleCompare, favoris, toggleFavori }) {
+  const m = metierById(id);
+  if (!m) return null;
+  const inCompare = compareList.some((c) => c.type === "metier" && c.id === id);
+  return (
+    <div className="max-w-3xl mx-auto px-5 py-12 oci-fade">
+      <button onClick={() => setView({ name: "metiers" })} className="oci-focus text-sm flex items-center gap-1 mb-6" style={{ color: COLORS.inkSoft }}>
+        <ChevronLeft size={15} /> Retour aux métiers
+      </button>
+
+      <div className="text-sm mb-1" style={{ color: COLORS.orange }}>{domNom(m.domaine)} · {m.niveau}</div>
+      <h1 className="oci-display text-3xl md:text-4xl mb-3" style={{ color: COLORS.ink }}>{m.nom}</h1>
+      <p className="text-base mb-6" style={{ color: COLORS.inkSoft }}>{m.description}</p>
+
+      <div className="flex flex-wrap gap-2 mb-8">
+        <button onClick={() => toggleCompare({ type: "metier", id })} className="oci-focus text-sm px-4 py-2 rounded-full border flex items-center gap-1.5" style={{ borderColor: inCompare ? COLORS.green : COLORS.line, color: inCompare ? COLORS.green : COLORS.ink }}>
+          <Scale size={14} /> {inCompare ? "Ajouté au comparateur" : "Ajouter au comparateur"}
+        </button>
+        <FavoriButton item={{ type: "metier", id }} favoris={favoris} toggleFavori={toggleFavori} />
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-4 mb-6">
+        <InfoBlock titre="Que fait-il / elle ?" items={m.missions} />
+        <InfoBlock titre="Où travaille-t-il / elle ?" items={m.ou} />
+        <InfoBlock titre="Compétences" items={m.competences} />
+        <InfoBlock titre="Qualités utiles" items={m.qualites} />
+      </div>
+
+      <Card className="p-5 md:p-6 mb-6">
+        <div className="font-semibold mb-3" style={{ color: COLORS.ink }}>Formations pour y accéder</div>
+        <div className="grid gap-2.5">
+          {m.formations.map((fid) => {
+            const f = formationById(fid);
+            if (!f) return null;
+            return (
+              <button key={fid} onClick={() => setView({ name: "formation", id: fid })} className="oci-focus text-left flex items-center justify-between px-4 py-3 rounded-xl border hover:shadow-sm transition-shadow" style={{ borderColor: COLORS.line }}>
+                <div>
+                  <div className="text-sm font-medium" style={{ color: COLORS.ink }}>{f.nom}</div>
+                  <div className="text-xs mt-0.5" style={{ color: COLORS.inkSoft }}>{f.niveau} · {f.diplome}</div>
+                </div>
+                <ArrowRight size={15} color={COLORS.inkSoft} />
+              </button>
+            );
+          })}
+        </div>
+      </Card>
+
+      {m.proches?.length > 0 && (
+        <div>
+          <div className="font-semibold mb-3" style={{ color: COLORS.ink }}>Métiers proches</div>
+          <div className="flex flex-wrap gap-2">
+            {m.proches.map((pid) => {
+              const p = metierById(pid);
+              if (!p) return null;
+              return <Pill key={pid} tone="orange" onClick={() => setView({ name: "metier", id: pid })}>{p.nom}</Pill>;
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function InfoBlock({ titre, items }) {
+  return (
+    <Card className="p-5">
+      <div className="font-semibold text-sm mb-2.5" style={{ color: COLORS.ink }}>{titre}</div>
+      <ul className="space-y-1.5">
+        {items.map((it) => (
+          <li key={it} className="text-sm flex gap-2" style={{ color: COLORS.inkSoft }}>
+            <span style={{ color: COLORS.green }}>—</span> {it}
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+}
+
+/* =========================================================================
+   PAGE : RECHERCHE FORMATIONS + FICHE FORMATION
+   ========================================================================= */
+
+function FormationsSearch({ setView }) {
+  const [q, setQ] = useState("");
+  const [domFilter, setDomFilter] = useState(null);
+
+  const results = useMemo(() => {
+    return FORMATIONS.filter((f) => {
+      const matchQ = q.trim() === "" || f.nom.toLowerCase().includes(q.toLowerCase());
+      const matchDom = !domFilter || f.domaine === domFilter;
+      return matchQ && matchDom;
+    });
+  }, [q, domFilter]);
+
+  return (
+    <div className="max-w-5xl mx-auto px-5 py-12 oci-fade">
+      <SectionTitle eyebrow="Je connais ma formation" title="Recherche une formation" sub="BTS, Licence, CQP, diplôme d'ingénieur... découvre les métiers accessibles et les poursuites d'études." />
+
+      <div className="relative mb-5">
+        <SearchIcon size={17} className="absolute left-4 top-1/2 -translate-y-1/2" color={COLORS.inkSoft} />
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Ex : Licence Informatique, BTS Génie Civil, CQP Électricien..."
+          className="oci-focus w-full pl-11 pr-4 py-3.5 rounded-xl border text-sm"
+          style={{ borderColor: COLORS.line, background: COLORS.card }}
+        />
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-8">
+        <Pill tone="green" active={!domFilter} onClick={() => setDomFilter(null)} small>Tous</Pill>
+        {DOMAINES.map((d) => (
+          <Pill key={d.id} tone="green" active={domFilter === d.id} onClick={() => setDomFilter(d.id === domFilter ? null : d.id)} small>{d.nom}</Pill>
+        ))}
+      </div>
+
+      <div className="text-sm mb-3" style={{ color: COLORS.inkSoft }}>{results.length} formation(s)</div>
+      <div className="grid sm:grid-cols-2 gap-3">
+        {results.map((f) => (
+          <Card key={f.id} onClick={() => setView({ name: "formation", id: f.id })} className="p-4 hover:shadow-sm transition-shadow">
+            <div className="font-semibold text-sm" style={{ color: COLORS.ink }}>{f.nom}</div>
+            <div className="text-xs mt-1" style={{ color: COLORS.orange }}>{f.niveau} · {f.diplome}</div>
+            <div className="text-xs mt-2" style={{ color: COLORS.inkSoft }}>{domNom(f.domaine)}</div>
+          </Card>
+        ))}
+        {results.length === 0 && <div className="text-sm col-span-full" style={{ color: COLORS.inkSoft }}>Aucune formation trouvée.</div>}
+      </div>
+    </div>
+  );
+}
+
+function FormationFiche({ id, setView, compareList, toggleCompare, favoris, toggleFavori }) {
+  const f = formationById(id);
+  if (!f) return null;
+  const inCompare = compareList.some((c) => c.type === "formation" && c.id === id);
+  return (
+    <div className="max-w-3xl mx-auto px-5 py-12 oci-fade">
+      <button onClick={() => setView({ name: "formations" })} className="oci-focus text-sm flex items-center gap-1 mb-6" style={{ color: COLORS.inkSoft }}>
+        <ChevronLeft size={15} /> Retour aux formations
+      </button>
+
+      <div className="text-sm mb-1" style={{ color: COLORS.orange }}>{domNom(f.domaine)} · {f.niveau}</div>
+      <h1 className="oci-display text-3xl md:text-4xl mb-3" style={{ color: COLORS.ink }}>{f.nom}</h1>
+
+      <div className="flex flex-wrap gap-2 mb-8">
+        <button onClick={() => toggleCompare({ type: "formation", id })} className="oci-focus text-sm px-4 py-2 rounded-full border flex items-center gap-1.5" style={{ borderColor: inCompare ? COLORS.green : COLORS.line, color: inCompare ? COLORS.green : COLORS.ink }}>
+          <Scale size={14} /> {inCompare ? "Ajouté au comparateur" : "Ajouter au comparateur"}
+        </button>
+        <FavoriButton item={{ type: "formation", id }} favoris={favoris} toggleFavori={toggleFavori} />
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-4 mb-6">
+        <FactRow label="Diplôme" value={f.diplome} />
+        <FactRow label="Durée" value={f.duree} />
+        <FactRow label="Conditions d'accès" value={f.acces} />
+        <FactRow label="Poursuites d'études" value={f.poursuites} />
+      </div>
+
+      <Card className="p-5 md:p-6 mb-6">
+        <div className="font-semibold mb-3 flex items-center gap-2" style={{ color: COLORS.ink }}><Building2 size={16} color={COLORS.green} /> Établissements</div>
+        <div className="grid gap-2.5">
+          {f.etabs.map((eid) => {
+            const e = etabById(eid);
+            if (!e) return null;
+            return (
+              <div key={eid} className="flex items-center justify-between px-4 py-3 rounded-xl border" style={{ borderColor: COLORS.line }}>
+                <div>
+                  <div className="text-sm font-medium" style={{ color: COLORS.ink }}>{e.nom}</div>
+                  <div className="text-xs mt-0.5 flex items-center gap-1" style={{ color: COLORS.inkSoft }}><MapPin size={11} /> {e.ville} · {e.type}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Card>
+
       <div>
-        <h2>Une communauté d'apprentissage exigeante</h2>
-        <p>Élèves, enseignants et personnel administratif partagent un même objectif : préparer des agents de santé compétents et responsables, prêts à servir dans les structures publiques et privées du pays.</p>
-      </div>
-      <div class="chiffre">
-        <div class="n">1997</div>
-        <div class="l">Année de création de l'établissement</div>
+        <div className="font-semibold mb-3" style={{ color: COLORS.ink }}>Cette formation peut mener vers</div>
+        <div className="grid sm:grid-cols-2 gap-2.5">
+          {f.debouches.map((mid) => {
+            const m = metierById(mid);
+            if (!m) return null;
+            return (
+              <button key={mid} onClick={() => setView({ name: "metier", id: mid })} className="oci-focus text-left flex items-center justify-between px-4 py-3 rounded-xl border hover:shadow-sm transition-shadow" style={{ borderColor: COLORS.line }}>
+                <span className="text-sm" style={{ color: COLORS.ink }}>{m.nom}</span>
+                <ArrowRight size={14} color={COLORS.inkSoft} />
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
-  </section>
+  );
+}
 
-  <section id="admissions">
-    <div class="section-head">
-      <div class="eyebrow sans">Admissions</div>
-      <h2>Comment rejoindre l'institut</h2>
-      <p>La procédure d'inscription se déroule en quatre étapes, du dépôt de dossier à la rentrée.</p>
+function FactRow({ label, value }) {
+  return (
+    <div className="px-4 py-3 rounded-xl border" style={{ borderColor: COLORS.line }}>
+      <div className="text-xs" style={{ color: COLORS.inkSoft }}>{label}</div>
+      <div className="text-sm mt-1" style={{ color: COLORS.ink }}>{value}</div>
     </div>
-    <div class="etapes">
-      <div class="etape">
-        <div class="idx sans">Étape 1</div>
-        <div><h3>Dépôt du dossier</h3><p>Diplôme requis selon la filière, pièce d'identité et photos d'identité.</p></div>
-      </div>
-      <div class="etape">
-        <div class="idx sans">Étape 2</div>
-        <div><h3>Concours ou entretien</h3><p>Épreuve écrite et entretien de motivation selon la filière choisie.</p></div>
-      </div>
-      <div class="etape">
-        <div class="idx sans">Étape 3</div>
-        <div><h3>Résultats et confirmation</h3><p>Publication des admis et versement des frais de scolarité.</p></div>
-      </div>
-      <div class="etape">
-        <div class="idx sans">Étape 4</div>
-        <div><h3>Rentrée</h3><p>Accueil des nouveaux élèves et remise du règlement intérieur.</p></div>
-      </div>
-    </div>
-  </section>
+  );
+}
 
-</main>
+/* =========================================================================
+   PAGE : EXPLORER (domaines, établissements)
+   ========================================================================= */
 
-<footer id="contact">
-  <div class="footer-grid">
-    <div>
-      <h4>INSTITUT</h4>
-      <p style="max-width:320px;">Institut Supérieur Privé de Formation en Santé Raoul Follereau — établissement privé de formation en sciences de la santé.</p>
-    </div>
-    <div>
-      <h4>CONTACT</h4>
-      <p>Fada N'Gourma, Burkina Faso</p>
-      <a href="#">Formulaire de contact</a>
-      <a href="#">Page Facebook</a>
-    </div>
-    <div>
-      <h4>LIENS</h4>
-      <a href="#filieres">Filières</a>
-      <a href="#admissions">Admissions</a>
-      <a href="#mission">L'institut</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 IPS Raoul Follereau</span>
-    <span>Maquette de démonstration</span>
-  </div>
-</footer>
+function Explorer({ setView }) {
+  const [tab, setTab] = useState("domaines");
+  return (
+    <div className="max-w-5xl mx-auto px-5 py-12 oci-fade">
+      <SectionTitle eyebrow="Explorer librement" title="Domaines, formations et établissements" sub="Parcours librement toute la base, sans passer par le questionnaire." />
 
-<div class="flagbar"><span class="r"></span><span class="v"></span></div>
+      <div className="flex gap-2 mb-8">
+        <Pill tone="green" active={tab === "domaines"} onClick={() => setTab("domaines")}>Domaines</Pill>
+        <Pill tone="green" active={tab === "etabs"} onClick={() => setTab("etabs")}>Établissements</Pill>
+      </div>
 
+      {tab === "domaines" && (
+        <div className="grid sm:grid-cols-2 gap-3">
+          {DOMAINES.map((d) => {
+            const nbMetiers = METIERS.filter((m) => m.domaine === d.id).length;
+            const nbFormations = FORMATIONS.filter((f) => f.domaine === d.id).length;
+            return (
+              <Card key={d.id} onClick={() => setView({ name: "metiers" })} className="p-5 hover:shadow-sm transition-shadow">
+                <div className="font-semibold text-sm" style={{ color: COLORS.ink }}>{d.nom}</div>
+                <div className="text-xs mt-2" style={{ color: COLORS.inkSoft }}>{nbMetiers} métiers · {nbFormations} formations</div>
+              </Card>
+            );
+          })}
+        </div>
+      )}
+
+      {tab === "etabs" && (
+        <div className="grid sm:grid-cols-2 gap-3">
+          {ETABLISSEMENTS.map((e) => (
+            <Card key={e.id} className="p-5">
+              <div className="font-semibold text-sm" style={{ color: COLORS.ink }}>{e.nom}</div>
+              <div className="text-xs mt-1.5 flex items-center gap-1" style={{ color: COLORS.inkSoft }}><MapPin size={11} /> {e.ville}</div>
+              <div className="text-xs mt-1" style={{ color: COLORS.orange }}>{e.type}</div>
+              <div className="flex flex-wrap gap-1.5 mt-3">
+                {e.domaines.map((did) => (
+                  <span key={did} className="text-xs px-2 py-0.5 rounded-full" style={{ background: COLORS.greenSoft, color: COLORS.green }}>{domNom(did)}</span>
+                ))}
+              </div>
+            </Card>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* =========================================================================
+   PAGE : JE SUIS DÉJÀ ÉTUDIANT
+   ========================================================================= */
+
+function Etudiant({ setView }) {
+  const [domaine, setDomaine] = useState(null);
+  const [niveau, setNiveau] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
+
+  if (!submitted) {
+    return (
+      <div className="max-w-2xl mx-auto px-5 py-12 oci-fade">
+        <SectionTitle eyebrow="Je suis déjà étudiant" title="Où en es-tu ?" sub="Indique ton domaine actuel et ton niveau : on te montre les métiers accessibles, les poursuites d'études et les passerelles vers d'autres domaines." />
+
+        <div className="mb-6">
+          <div className="text-sm font-medium mb-2.5" style={{ color: COLORS.ink }}>Ton domaine d'études actuel</div>
+          <div className="flex flex-wrap gap-2">
+            {DOMAINES.map((d) => (
+              <Pill key={d.id} tone="green" active={domaine === d.id} onClick={() => setDomaine(d.id)}>{d.nom}</Pill>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <div className="text-sm font-medium mb-2.5" style={{ color: COLORS.ink }}>Ton niveau actuel</div>
+          <div className="flex flex-wrap gap-2">
+            {NIVEAUX_ETUDIANT.map((n) => (
+              <Pill key={n.id} tone="orange" active={niveau === n.id} onClick={() => setNiveau(n.id)}>{n.label}</Pill>
+            ))}
+          </div>
+        </div>
+
+        <button
+          disabled={!domaine || !niveau}
+          onClick={() => setSubmitted(true)}
+          className="oci-focus text-sm px-6 py-3 rounded-full text-white disabled:opacity-40"
+          style={{ background: COLORS.green }}
+        >
+          Voir mes possibilités
+        </button>
+      </div>
+    );
+  }
+
+  const metiersDomaine = METIERS.filter((m) => m.domaine === domaine);
+  const metiersAccessibles = metiersDomaine.filter((m) => niveauRange(m.niveau).min <= niveau);
+  const formationsDomaine = FORMATIONS.filter((f) => f.domaine === domaine);
+  const formationsSuite = formationsDomaine.filter((f) => niveauRange(f.niveau).max > niveau);
+  const passerelles = (ADJACENT_DOMAINS[domaine] || []).slice(0, 3);
+
+  return (
+    <div className="max-w-4xl mx-auto px-5 py-12 oci-fade">
+      <button onClick={() => setSubmitted(false)} className="oci-focus text-sm flex items-center gap-1 mb-6" style={{ color: COLORS.inkSoft }}>
+        <ChevronLeft size={15} /> Modifier ma situation
+      </button>
+      <div className="text-sm mb-1" style={{ color: COLORS.orange }}>{domNom(domaine)} · {NIVEAUX_ETUDIANT.find((n) => n.id === niveau)?.label}</div>
+      <h1 className="oci-display text-3xl md:text-4xl mb-8" style={{ color: COLORS.ink }}>Tes possibilités à partir d'ici</h1>
+
+      <div className="mb-8">
+        <div className="font-semibold mb-3" style={{ color: COLORS.ink }}>Métiers déjà accessibles</div>
+        {metiersAccessibles.length > 0 ? (
+          <div className="grid sm:grid-cols-2 gap-3">
+            {metiersAccessibles.map((m) => (
+              <Card key={m.id} onClick={() => setView({ name: "metier", id: m.id })} className="p-4 hover:shadow-sm transition-shadow">
+                <div className="font-semibold text-sm" style={{ color: COLORS.ink }}>{m.nom}</div>
+                <div className="text-xs mt-1" style={{ color: COLORS.inkSoft }}>{m.niveau}</div>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm" style={{ color: COLORS.inkSoft }}>Pas encore de métier accessible à ce niveau dans ce domaine — continue tes études pour en débloquer.</p>
+        )}
+      </div>
+
+      <div className="mb-8">
+        <div className="font-semibold mb-3" style={{ color: COLORS.ink }}>Formations de poursuite dans ton domaine</div>
+        {formationsSuite.length > 0 ? (
+          <div className="grid sm:grid-cols-2 gap-3">
+            {formationsSuite.map((f) => (
+              <Card key={f.id} onClick={() => setView({ name: "formation", id: f.id })} className="p-4 hover:shadow-sm transition-shadow">
+                <div className="font-semibold text-sm" style={{ color: COLORS.ink }}>{f.nom}</div>
+                <div className="text-xs mt-1" style={{ color: COLORS.inkSoft }}>{f.niveau} · {f.diplome}</div>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm" style={{ color: COLORS.inkSoft }}>Tu es déjà au niveau le plus avancé référencé dans ce domaine.</p>
+        )}
+      </div>
+
+      <div>
+        <div className="font-semibold mb-3" style={{ color: COLORS.ink }}>Passerelles vers d'autres domaines</div>
+        <p className="text-sm mb-3" style={{ color: COLORS.inkSoft }}>Ces domaines partagent des compétences avec le tien — une réorientation y serait plus naturelle qu'ailleurs.</p>
+        <div className="flex flex-wrap gap-2">
+          {passerelles.map((did) => (
+            <Pill key={did} tone="orange" onClick={() => setView({ name: "reorientation" })}>{domNom(did)}</Pill>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   PAGE : JE VEUX ME RÉORIENTER
+   ========================================================================= */
+
+function Reorientation({ setView }) {
+  const [domaineActuel, setDomaineActuel] = useState(null);
+  const [domaineCible, setDomaineCible] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
+
+  if (!submitted) {
+    return (
+      <div className="max-w-2xl mx-auto px-5 py-12 oci-fade">
+        <SectionTitle eyebrow="Je veux me réorienter" title="D'où tu viens, où tu veux aller" sub="Indique ta situation actuelle et le domaine qui t'attire : on te propose des formations et métiers pour t'en rapprocher." />
+
+        <div className="mb-6">
+          <div className="text-sm font-medium mb-2.5" style={{ color: COLORS.ink }}>Ton domaine actuel</div>
+          <div className="flex flex-wrap gap-2">
+            {DOMAINES.map((d) => (
+              <Pill key={d.id} tone="green" active={domaineActuel === d.id} onClick={() => setDomaineActuel(d.id)}>{d.nom}</Pill>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <div className="text-sm font-medium mb-2.5" style={{ color: COLORS.ink }}>Le domaine qui t'attire</div>
+          <div className="flex flex-wrap gap-2">
+            {DOMAINES.filter((d) => d.id !== domaineActuel).map((d) => (
+              <Pill key={d.id} tone="orange" active={domaineCible === d.id} onClick={() => setDomaineCible(d.id)}>{d.nom}</Pill>
+            ))}
+          </div>
+        </div>
+
+        <button
+          disabled={!domaineActuel || !domaineCible}
+          onClick={() => setSubmitted(true)}
+          className="oci-focus text-sm px-6 py-3 rounded-full text-white disabled:opacity-40"
+          style={{ background: COLORS.green }}
+        >
+          Voir les passerelles possibles
+        </button>
+      </div>
+    );
+  }
+
+  const formationsCibles = FORMATIONS.filter((f) => f.domaine === domaineCible).sort((a, b) => niveauRange(a.niveau).min - niveauRange(b.niveau).min);
+  const metiersCibles = METIERS.filter((m) => m.domaine === domaineCible);
+  const estAdjacent = (ADJACENT_DOMAINS[domaineActuel] || []).includes(domaineCible);
+
+  return (
+    <div className="max-w-4xl mx-auto px-5 py-12 oci-fade">
+      <button onClick={() => setSubmitted(false)} className="oci-focus text-sm flex items-center gap-1 mb-6" style={{ color: COLORS.inkSoft }}>
+        <ChevronLeft size={15} /> Modifier ma situation
+      </button>
+      <div className="text-sm mb-1" style={{ color: COLORS.orange }}>{domNom(domaineActuel)} → {domNom(domaineCible)}</div>
+      <h1 className="oci-display text-3xl md:text-4xl mb-4" style={{ color: COLORS.ink }}>Se rapprocher de {domNom(domaineCible).toLowerCase()}</h1>
+
+      <Card className="p-5 mb-8" style={{ background: estAdjacent ? COLORS.greenSoft : COLORS.orangeSoft }}>
+        <p className="text-sm" style={{ color: COLORS.ink }}>
+          {estAdjacent
+            ? "Bonne nouvelle : ce domaine partage des compétences avec le tien, la transition devrait être assez naturelle."
+            : "Ce changement est plus important — il te faudra probablement repartir d'une formation d'entrée dans ce domaine plutôt que d'une passerelle directe."}
+        </p>
+      </Card>
+
+      <div className="mb-8">
+        <div className="font-semibold mb-3" style={{ color: COLORS.ink }}>Formations pour entrer dans ce domaine</div>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {formationsCibles.slice(0, 6).map((f) => (
+            <Card key={f.id} onClick={() => setView({ name: "formation", id: f.id })} className="p-4 hover:shadow-sm transition-shadow">
+              <div className="font-semibold text-sm" style={{ color: COLORS.ink }}>{f.nom}</div>
+              <div className="text-xs mt-1" style={{ color: COLORS.inkSoft }}>{f.niveau} · {f.acces}</div>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <div className="font-semibold mb-3" style={{ color: COLORS.ink }}>Métiers accessibles dans ce domaine</div>
+        <div className="flex flex-wrap gap-2">
+          {metiersCibles.map((m) => (
+            <Pill key={m.id} tone="green" onClick={() => setView({ name: "metier", id: m.id })}>{m.nom}</Pill>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   PAGE : FAVORIS
+   ========================================================================= */
+
+function Favoris({ favoris, setView, toggleFavori, loading }) {
+  if (loading) {
+    return (
+      <div className="max-w-3xl mx-auto px-5 py-12 oci-fade">
+        <p className="text-sm" style={{ color: COLORS.inkSoft }}>Chargement de tes favoris…</p>
+      </div>
+    );
+  }
+
+  const items = favoris.map((f) => ({ ...f, data: f.type === "metier" ? metierById(f.id) : formationById(f.id) })).filter((f) => f.data);
+
+  return (
+    <div className="max-w-5xl mx-auto px-5 py-12 oci-fade">
+      <SectionTitle eyebrow="Favoris" title="Tes métiers et formations enregistrés" sub="Conservés uniquement sur cet appareil — sans compte, sans connexion." />
+      {items.length === 0 ? (
+        <p className="text-sm" style={{ color: COLORS.inkSoft }}>Aucun favori pour l'instant. Ajoute des métiers ou formations depuis leur fiche en cliquant sur « Ajouter aux favoris ».</p>
+      ) : (
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+          {items.map((it) => (
+            <Card key={`${it.type}-${it.id}`} className="p-4 relative">
+              <button onClick={() => toggleFavori(it)} className="oci-focus absolute top-3 right-3" aria-label="Retirer des favoris">
+                <Heart size={15} fill={COLORS.orange} color={COLORS.orange} />
+              </button>
+              <div onClick={() => setView({ name: it.type === "metier" ? "metier" : "formation", id: it.id })} className="cursor-pointer pr-6">
+                <div className="font-semibold text-sm" style={{ color: COLORS.ink }}>{it.data.nom}</div>
+                <div className="text-xs mt-1" style={{ color: COLORS.orange }}>{it.type === "metier" ? "Métier" : "Formation"} · {domNom(it.data.domaine)}</div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* =========================================================================
+   PAGE : COMPARATEUR
+   ========================================================================= */
+
+function Comparateur({ compareList, toggleCompare }) {
+  if (compareList.length === 0) {
+    return (
+      <div className="max-w-3xl mx-auto px-5 py-12 oci-fade">
+        <SectionTitle eyebrow="Comparateur" title="Rien à comparer pour l'instant" sub="Ajoute des métiers ou des formations au comparateur depuis leur fiche, puis reviens ici." />
+      </div>
+    );
+  }
+
+  const items = compareList.map((c) => (c.type === "metier" ? { ...c, data: metierById(c.id) } : { ...c, data: formationById(c.id) }));
+
+  const rowsMetier = [
+    ["Domaine", (d) => domNom(d.domaine)],
+    ["Niveau d'études", (d) => d.niveau],
+    ["Compétences clés", (d) => d.competences.join(", ")],
+    ["Où travailler", (d) => d.ou.join(", ")],
+  ];
+  const rowsFormation = [
+    ["Domaine", (d) => domNom(d.domaine)],
+    ["Diplôme", (d) => d.diplome],
+    ["Durée", (d) => d.duree],
+    ["Accès", (d) => d.acces],
+    ["Poursuites", (d) => d.poursuites],
+  ];
+
+  return (
+    <div className="max-w-5xl mx-auto px-5 py-12 oci-fade">
+      <SectionTitle eyebrow="Comparateur" title="Comparer tes options" />
+      <div className="overflow-x-auto oci-scroll">
+        <table className="w-full text-sm border-separate" style={{ borderSpacing: "0 8px" }}>
+          <thead>
+            <tr>
+              <th className="text-left px-2" style={{ color: COLORS.inkSoft }}></th>
+              {items.map((it) => (
+                <th key={it.id} className="text-left px-3 py-2 min-w-[200px]">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-semibold" style={{ color: COLORS.ink }}>{it.data.nom}</span>
+                    <button onClick={() => toggleCompare(it)} className="oci-focus"><X size={14} color={COLORS.inkSoft} /></button>
+                  </div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(items[0].type === "metier" ? rowsMetier : rowsFormation).map(([label, get]) => (
+              <tr key={label}>
+                <td className="px-2 py-2 align-top text-xs whitespace-nowrap" style={{ color: COLORS.inkSoft }}>{label}</td>
+                {items.map((it) => (
+                  <td key={it.id} className="px-3 py-2 align-top rounded-xl" style={{ background: COLORS.card, border: `1px solid ${COLORS.line}`, color: COLORS.ink }}>
+                    {it.data ? get(it.data) : "—"}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   APP
+   ========================================================================= */
+
+function App() {
+  const [view, setView] = useState({ name: "home" });
+  const [compareList, setCompareList] = useState([]);
+  const [favoris, setFavoris] = useState([]);
+  const [favorisLoading, setFavorisLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await window.storage.get("favoris", false);
+        if (!cancelled && res?.value) setFavoris(JSON.parse(res.value));
+      } catch (e) {
+        // pas encore de favoris enregistrés, ou stockage indisponible : on part d'une liste vide
+      } finally {
+        if (!cancelled) setFavorisLoading(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  const toggleFavori = (item) => {
+    setFavoris((prev) => {
+      const exists = prev.some((f) => f.type === item.type && f.id === item.id);
+      const next = exists ? prev.filter((f) => !(f.type === item.type && f.id === item.id)) : [...prev, item];
+      window.storage.set("favoris", JSON.stringify(next), false).catch(() => {});
+      return next;
+    });
+  };
+
+  const toggleCompare = (item) => {
+    setCompareList((prev) => {
+      const exists = prev.some((c) => c.type === item.type && c.id === item.id);
+      if (exists) return prev.filter((c) => !(c.type === item.type && c.id === item.id));
+      const sameType = prev.filter((c) => c.type === item.type);
+      if (sameType.length >= 3) return prev;
+      return [...prev, item];
+    });
+  };
+
+  let content;
+  if (view.name === "home") content = <Home setView={setView} />;
+  else if (view.name === "quiz") content = <Quiz setView={setView} />;
+  else if (view.name === "resultats") content = <Resultats pct={view.pct} setView={setView} />;
+  else if (view.name === "metiers") content = <MetiersSearch setView={setView} />;
+  else if (view.name === "metier") content = <MetierFiche id={view.id} setView={setView} compareList={compareList} toggleCompare={toggleCompare} favoris={favoris} toggleFavori={toggleFavori} />;
+  else if (view.name === "formations") content = <FormationsSearch setView={setView} />;
+  else if (view.name === "formation") content = <FormationFiche id={view.id} setView={setView} compareList={compareList} toggleCompare={toggleCompare} favoris={favoris} toggleFavori={toggleFavori} />;
+  else if (view.name === "explorer") content = <Explorer setView={setView} />;
+  else if (view.name === "etudiant") content = <Etudiant setView={setView} />;
+  else if (view.name === "reorientation") content = <Reorientation setView={setView} />;
+  else if (view.name === "favoris") content = <Favoris favoris={favoris} setView={setView} toggleFavori={toggleFavori} loading={favorisLoading} />;
+  else if (view.name === "comparateur") content = <Comparateur compareList={compareList} toggleCompare={toggleCompare} />;
+  else content = <Home setView={setView} />;
+
+  return (
+    <div className="oci-root min-h-screen">
+      <GlobalStyle />
+      <Header view={view} setView={setView} />
+      {content}
+      <footer className="border-t mt-10" style={{ borderColor: COLORS.line }}>
+        <div className="max-w-6xl mx-auto px-5 py-8 text-xs flex flex-wrap items-center justify-between gap-3" style={{ color: COLORS.inkSoft }}>
+          <span>Ma Voie CI — Gratuit, sans compte. Les résultats sont des pistes d'aide à la décision, pas des décisions définitives.</span>
+          <div className="flex items-center gap-2">
+            {favoris.length > 0 && (
+              <button onClick={() => setView({ name: "favoris" })} className="oci-focus px-3 py-1.5 rounded-full border flex items-center gap-1.5" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
+                <Heart size={13} /> Favoris ({favoris.length})
+              </button>
+            )}
+            {compareList.length > 0 && (
+              <button onClick={() => setView({ name: "comparateur" })} className="oci-focus px-3 py-1.5 rounded-full border flex items-center gap-1.5" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
+                <Scale size={13} /> Comparateur ({compareList.length})
+              </button>
+            )}
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
+</script>
+<script>
+  // On transpile nous-mêmes avec le runtime "classic" (React.createElement),
+  // pour éviter le runtime "automatic" par défaut qui insère un import ES module
+  // que le navigateur ne peut pas exécuter dans un <script> classique.
+  (function () {
+    var source = document.getElementById("app-source").textContent;
+    try {
+      var result = Babel.transform(source, {
+        presets: [["react", { runtime: "classic" }]],
+        filename: "app.jsx",
+      });
+      var script = document.createElement("script");
+      script.text = result.code;
+      document.body.appendChild(script);
+    } catch (e) {
+      document.getElementById("root").innerHTML =
+        '<pre style="white-space:pre-wrap;padding:20px;color:#a00;font-family:monospace;">Erreur au chargement de l\'application :\n' +
+        (e && e.message ? e.message : e) + '</pre>';
+      console.error(e);
+    }
+  })();
+</script>
 </body>
 </html>
